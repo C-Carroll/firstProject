@@ -282,7 +282,7 @@ Returns all the spots owned (created) by the current user.
 
 * Require Authentication: true
 * Request
-  * Method: ? GET 
+  * Method: ? GET
   * URL: ? /users/me/spots
   * Body: none
 
@@ -594,7 +594,7 @@ Deletes an existing spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: ? DELETE
-  * URL: ? /spots/:Id/delete
+  * URL: ? /spots/:spotId/delete
   * Body: none
 
 * Successful Response
@@ -1313,7 +1313,7 @@ Delete an existing image for a Spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: ? DELETE
-  * URL: ? images/:spotId
+  * URL: ? images/spots/:spotId/delete
   * Body: none
 
 * Successful Response
@@ -1348,7 +1348,7 @@ Delete an existing image for a Review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: ? DELETE
-  * URL: ? images/:reviewId
+  * URL: ? images/reviews/:reviewId/delete
   * Body: none
 
 * Successful Response
