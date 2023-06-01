@@ -282,8 +282,8 @@ Returns all the spots owned (created) by the current user.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: ? GET 
+  * URL: ? /users/me/spots
   * Body: none
 
 * Successful Response
@@ -630,7 +630,7 @@ Returns all the reviews written by the current user.
 * Require Authentication: true
 * Request
   * Method: ? GET
-  * URL: ? /reviews/me
+  * URL: ? /users/me/reviews
   * Body: none
 
 * Successful Response
@@ -686,7 +686,7 @@ Returns all the reviews that belong to a spot specified by id.
 * Require Authentication: false
 * Request
   * Method: ? GET
-  * URL: ? /reviews/:spotId
+  * URL: ? /spots/:spotId/reviews
   * Body: none
 
 * Successful Response
@@ -741,7 +741,7 @@ Create and return a new review for a spot specified by id.
 * Require Authentication: true
 * Request
   * Method: ? POST
-  * URL: ? /reviews/:spotId/create
+  * URL: ? /spots/:spotId/reviews/create
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -819,7 +819,7 @@ Create and return a new image for a review specified by id.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: ? PATCH
-  * URL: ? /reviews/:reviewId/addImage
+  * URL: ? /spots/:spotId/reviews/addImage
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -876,7 +876,7 @@ Update and return an existing review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: ? PATCH
-  * URL: ? /review/:reviewId/update
+  * URL: ? /reviews/:reviewId/update
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -978,7 +978,7 @@ Return all the bookings that the current user has made.
 * Require Authentication: true
 * Request
   * Method: ? GET
-  * URL: ? /bookings/me
+  * URL: ? /users/me/bookings
   * Body: none
 
 * Successful Response
@@ -1264,7 +1264,7 @@ Delete an existing booking.
   Spot must belong to the current user
 * Request
   * Method: ? DELETE
-  * URL: ? /bookings/:bookingId
+  * URL: ? /bookings/:bookingId/delete
   * Body: none
 
 * Successful Response
