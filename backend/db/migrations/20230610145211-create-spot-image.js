@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === "production") {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spot_Images', {
+    await queryInterface.createTable("Spot_Images", {
       id: {
         allowNull: false,
         autoIncrement: true,
