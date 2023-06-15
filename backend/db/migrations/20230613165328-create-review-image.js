@@ -3,35 +3,34 @@ let options = {};
 if (process.env.NODE_ENV === "production") {
   options.schema = process.env.SCHEMA; // define your schema in options object
 }
+const { referrerPolicy } = require('helmet');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Spot_Images", {
+    await queryInterface.createTable('Review_Images', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      spotId: {
+      reviewId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Spots',
+          model: 'Reviews',
           key: 'id'
         }
       },
-      spotPhotoUrl: {
+      url: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      preview: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.literal('CURRENT_TIMESTAMP')
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
@@ -40,7 +39,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Spot_Images"
-    await queryInterface.dropTable(options);
+    await queryInterface.dropTable('Review_Images');
   }
 };

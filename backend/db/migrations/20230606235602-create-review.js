@@ -13,20 +13,33 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userID: {
-        type: Sequelize.INTEGER
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       spotId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spots',
+          key: 'id'
+        }
       },
       review: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       stars: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       reviewImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+
       },
       createdAt: {
         allowNull: false,
@@ -38,7 +51,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       }
-    }, options, options, options);
+    }, options);
   },
   async down(queryInterface, Sequelize) {
     options.tableName = "Reviews"
