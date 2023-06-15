@@ -23,19 +23,19 @@ module.exports = {
       },
       spotPhotoUrl: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       preview: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.literal('CURRENT_TIMESTAMP')
+        type: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.literal('CURRENT_TIMESTAMP')
+        type: Sequelize.literal('CURRENT_TIMESTAMP'),
       }
     }, options);
   },
