@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { Spot, User, Spot_Image, Review, Review_Image, Booking } = require('../../db/models');
+const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
 
@@ -110,7 +110,7 @@ router.post('/:spotId/images', requireAuth, async(req, res) => {
     const { url, preview } = req.body
     let newPhoto;
 
-    const images = await Spot_Image.findAll({
+    const images = await SpotImage.findAll({
         where: {
             spotId: spotId
         },
@@ -129,7 +129,7 @@ router.post('/:spotId/images', requireAuth, async(req, res) => {
             )
         }
 
-        newPhoto = await Spot_Image.create({
+        newPhoto = await SpotImage.create({
             spotId: spotId,
             spotPhotoUrl: url,
             preview
@@ -233,7 +233,7 @@ router.get("/:spotId/reviews", async(req, res) => {
             attributes: ["id", "firstName", "lastName"]
             },
             {
-                model: Review_Image,
+                model: ReviewImage,
                 attributes: ["id", "url"]
             }
         ]
@@ -359,7 +359,7 @@ router.get("/:spotId", async(req, res) => {
    }
 
    //find images
-   const images = await Spot_Image.findAll({
+   const images = await SpotImage.findAll({
     where: {
         spotId: id
     },
@@ -389,7 +389,7 @@ router.get("/:spotId", async(req, res) => {
    updatedAt:  spot.updatedAt,
    numReviews: 0, ///fix this when access
    avgStarRating: spot.avgStarRating,
-   Spot_Images: images,
+   SpotImages: images,
    Owner: ownerInfo
    }
 

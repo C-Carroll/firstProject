@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { Spot, User, Spot_Image, Review, Review_Image } = require('../../db/models');
+const { Spot, User, SpotImage, Review, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
 
@@ -39,7 +39,7 @@ router.post('/:reviewId/images', requireAuth, async(req, res) => {
             userId: userId
     }})
     if(!review) return res.status(404).json({message: "Review couldn't be found"})
-    const picCounter = await Review_Image.count({
+    const picCounter = await ReviewImage.count({
         where: {
             reviewId: reviewId,
         }
@@ -50,7 +50,7 @@ router.post('/:reviewId/images', requireAuth, async(req, res) => {
     let newPhoto;
 
     try{
-        newPhoto = await Review_Image.create({
+        newPhoto = await ReviewImage.create({
             reviewId: reviewId,
             url: url
         })
@@ -130,7 +130,7 @@ router.get('/current', requireAuth, async(req, res)=> {
                 ]
             },
             {
-                model: Review_Image,
+                model: ReviewImage,
                 attributes: ["id", "url"]
             }
         ]
