@@ -72,7 +72,7 @@ router.get('/current',requireAuth, async(req, res) => {
 
     const findAllUserSpots = await Spot.findAll({
         where: {
-            ownerID: req.user.dataValues.id
+            ownerID: req.user.id
         }
     })
 
