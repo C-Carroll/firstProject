@@ -72,7 +72,7 @@ router.get('/current',requireAuth, async(req, res) => {
 
     const findAllUserSpots = await Spot.findAll({
         where: {
-            ownerID: req.user.id
+            ownerId: req.user.id
         }
     })
 
@@ -346,7 +346,7 @@ router.get("/:spotId", async(req, res) => {
     let id;
    if(Number.isInteger(Number(req.params.spotId)) === true) {
     id = Number(req.params.spotId)
-   } else console.log('failll') ///MAKE THIS THROW AN ERROR
+   } //else console.log('failll') ///MAKE THIS THROW AN ERROR
    const spot = await Spot.findByPk(id)
    if(!spot) res.status(404).json({message: "Spot couldn't be found"})
 
