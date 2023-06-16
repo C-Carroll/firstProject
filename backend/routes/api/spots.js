@@ -255,8 +255,8 @@ const userId = Number(req.user.id)
 let newReview;
 const reviewCheck = await Review.findOne({
     where: {
+        userId: userId,
         spotId: spotId,
-        userId: userId
     }
 })
 if (reviewCheck) return res.status(403).json({message: "User already has a review for this spot"})
