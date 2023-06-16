@@ -256,13 +256,13 @@ let newReview;
 const reviewCheck = await Review.findOne({
     where: {
         spotId: spotId,
-        userId: userId
+        userId,
     }
 })
 if (reviewCheck) return res.status(403).json({message: "User already has a review for this spot"})
 try{
     newReview = await Review.create({
-        userId: userId,
+        userId,
         spotId: spotId,
         review,
         stars
