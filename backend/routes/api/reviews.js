@@ -98,10 +98,10 @@ router.put('/:reviewId',validReview, requireAuth, async(req, res) => {
     const review = await Review.findOne({
         where: {
             id: reviewId,
-            userId: userId
         }
     })
     if(!review)return res.status(404).json({message: "Review couldn't be found"});
+    if(!(review.userId === userId))return res.status(403).json({message: "Forbidden"})
     try{
         await review.update(req.body)
 

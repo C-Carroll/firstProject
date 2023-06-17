@@ -97,7 +97,6 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
     const booking = await Booking.findOne({
         where: {
             id: bookingId,
-            userId: userId
         }
     })
     if(!booking)return res.status(404).json({"message": "Booking couldn't be found"});
