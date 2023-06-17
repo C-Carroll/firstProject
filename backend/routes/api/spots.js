@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { Sequelize } = require("sequelize");
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
@@ -85,13 +85,120 @@ router.get('/current',requireAuth, async(req, res) => {
 router.get(
     '/',
     async (req, res) => {
-        let arr = []
-        let allDataSpots = await Spot.findAll()
+        // let arr = []
+        // let allDataSpots = await Spot.findAll()
 
-        allDataSpots.forEach(spot => { arr.push(spot.dataValues) });
+        // allDataSpots.forEach(spot => { arr.push(spot.dataValues) });
 
-        if (arr.length >= 1) res.json({ spot: [...arr] });
-        else return res.json({ spot: null });
+        // if (arr.length >= 1) res.json({ spot: [...arr] });
+        // else return res.json({ spot: null });
+
+        const { page = 1, size = 20, minLat, maxLat, minLon, maxLon, minPrice, maxPrice } = req.query;
+
+        // Validate query parameters
+        const errors = {};
+        if (isNaN(page) || page < 1 || page > 10) {
+          errors.page = "Page must be an integer between 1 and 10";
+        }
+        if (isNaN(size) || size < 1 || size > 20) {
+          errors.size = "Size must be an integer between 1 and 20";
+        }
+        if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
+          errors.minLat = "Minimum latitude is invalid";
+        }
+        if (maxLat && (isNaN(maxLat) || maxLat < -90 || maxLat > 90)) {
+          errors.maxLat = "Maximum latitude is invalid";
+        }
+        if (minLon && (isNaN(minLon) || minLon < -180 || minLon > 180)) {
+          errors.minLon = "Minimum longitude is invalid";
+        }
+        if (maxLon && (isNaN(maxLon) || maxLon < -180 || maxLon > 180)) {
+          errors.maxLon = "Maximum longitude is invalid";
+        }
+        if (minPrice && (isNaN(minPrice) || minPrice < 0)) {
+          errors.minPrice = "Minimum price must be a decimal greater than or equal to 0";
+        }
+        if (maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
+          errors.maxPrice = "Maximum price must be a decimal greater than or equal to 0";
+        }
+
+        if (Object.keys(errors).length > 0) {
+          return res.status(400).json({ message: "Validation error", errors });
+        }
+
+        try {
+          const spots = await Spot.findAll({
+            include: [
+              {
+                model: Review,
+                attributes: [],
+                as: "SpotReviews",
+              },
+            //   {
+            //     model: Image,
+            //     as: "SpotImages",
+            //     where: { imageableType: "spot", preview: true },
+            //     attributes: ["url"],
+            //     order: [["createdAt", "DESC"]],
+            //     limit: 1,
+            //   },
+            ],
+            attributes: {
+              include: [[Sequelize.fn("AVG", Sequelize.col("SpotReviews.stars")), "avgRating"]],
+            },
+            group: ["Spot.id"],
+          });
+
+          let filteredSpots = spots;
+
+          if (minLat && maxLat) {
+            filteredSpots = filteredSpots.filter((spot) => spot.lat >= minLat && spot.lat <= maxLat);
+          } else if (minLat) {
+            filteredSpots = filteredSpots.filter((spot) => spot.lat >= minLat);
+          } else if (maxLat) {
+            filteredSpots = filteredSpots.filter((spot) => spot.lat <= maxLat);
+          }
+
+          if (minPrice && maxPrice) {
+            filteredSpots = filteredSpots.filter(
+              (spot) => spot.price >= minPrice && spot.price <= maxPrice
+            );
+          } else if (minPrice) {
+            filteredSpots = filteredSpots.filter((spot) => spot.price >= minPrice);
+          } else if (maxPrice) {
+            filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
+          }
+
+          const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
+            // const previewImage =
+            //   spot.SpotImages.length > 0 ? spot.SpotImages[0].url : "No Images uploaded.";
+
+            return {
+              id: spot.id,
+              ownerId: spot.ownerId,
+              address: spot.address,
+              city: spot.city,
+              state: spot.state,
+              country: spot.country,
+              lat: spot.lat,
+              lng: spot.lng,
+              name: spot.name,
+              description: spot.description,
+              price: spot.price,
+              createdAt: spot.createdAt,
+              updatedAt: spot.updatedAt,
+              avgRating: parseFloat(spot.getDataValue("avgRating") || 0).toFixed(1),
+              //previewImage,
+            };
+          });
+
+          return res.status(200).json({ Spots: formattedSpots, page, size });
+        } catch (error) {
+          console.error("Error fetching spots:", error);
+          return res.status(500).json({ message: "Error fetching spots" });
+        }
+
+
 });
 
 /*------------------------------------------------------*/
@@ -359,18 +466,33 @@ router.get("/:spotId", async(req, res) => {
    }
 
    //find images
-   const images = await SpotImage.findAll({
-    where: {
-        spotId: id
-    },
-    attributes: [
-        "id",
-        "url",
-        "preview"
-    ]
-    })
+//    const images = await SpotImage.findAll({
+//     where: {
+//         spotId: id
+//     },
+    // attributes: [
+    //     "id",
+    //     "url",
+    //     "preview"
+    // ]
+    // })
    // const imgArr
    // console.log(images)
+    let reviewCount = await Review.count({
+        where: { stars: {
+            [Op.between]: [1, 5]
+            },
+            spotId: id
+        }
+    })
+    let reviewSum = await Review.sum('stars', {
+        where: { stars: {
+            [Op.between]: [1, 5]
+            }, spotId: id,
+        }
+    })
+
+    let average = (reviewSum / reviewCount)
 
    //format
    let spotInfo ={
@@ -387,13 +509,13 @@ router.get("/:spotId", async(req, res) => {
    price: spot.price,
    createdAt: spot.createdAt,
    updatedAt:  spot.updatedAt,
-   numReviews: 0, ///fix this when access
-   avgStarRating: spot.avgStarRating,
-   SpotImages: images,
+   numReviews: reviewCount, ///fix this when access -DONE
+   avgStarRating: average,
+  // SpotImages: images,
    Owner: ownerInfo
    }
 
-   console.log(owner)
+   //console.log(owner)
 
    //need to add spot images and owners - DONE
 
