@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         models.Spot,
         { foreignKey: "ownerId"}
       )
-      User.hasMany(models.Review)
+      User.hasMany(
+        models.Review,
+        {foreignKey: "userId"})
     }
   };
 
