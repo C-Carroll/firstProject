@@ -115,9 +115,8 @@ router.get(
                   as: "SpotReviews",
                 },
                 {
-                  model: Image,
-                  as: "SpotImages",
-                  where: { imageableType: "spot", preview: true },
+                  model: SpotImage,
+                  where: { preview: true },
                   attributes: ["url"],
                   order: [["createdAt", "DESC"]],
                   limit: 1,
