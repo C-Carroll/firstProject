@@ -140,7 +140,7 @@ router.get(
                 price: spot.price,
                 createdAt: spot.createdAt,
                 updatedAt: spot.updatedAt,
-                avgRating: spot.avgRating, //parseFloat(spot.getDataValue("avgRating") || 0).toFixed(1),
+                avgRating: spot.avgRating,
                 previewImage: spot.previewImage
               };
             });
@@ -166,9 +166,10 @@ router.post('/:spotId/images', requireAuth, async(req, res) => {
     const spot = await Spot.findOne({
         where: {
             id: spotId,
-            ownerId: userId
     }})
     if(!spot) return res.status(404).json({message: "Spot couldn't be found"})
+
+    if (!(spot.ownerId === userId)) return res.status(403).json({message: "Forbiden"})
 
     const { url, preview } = req.body
     let newPhoto;
@@ -392,7 +393,7 @@ try{
         {avgRating: average},
         {where: {id: spotId}}
     )
-    console.log(newReview)
+    //console.log(newReview)
     res.status(201).json(safeReview)
 }
 catch(error){
@@ -413,10 +414,10 @@ router.delete('/:spotId', requireAuth, async(req, res) => {
     const spot = await Spot.findOne({
         where: {
             id: spotId,
-            ownerId: userId
         }
     })
     if(!spot) return res.status(404).json({message: "Spot not found"})
+    if(!(spot.ownerId === userId))return res.status(403).json({message: "Forbidden"})
     await spot.destroy()
     res.status(200).json({"message": "Successfully deleted"})
 })
@@ -430,11 +431,10 @@ router.put('/:spotId', requireAuth, async(req, res) => {
     const spot = await Spot.findOne({
         where: {
             id: spotId,
-            ownerId: userId
         }
     })
-    //console.log(spot)
     if (!spot) return res.status(404).json({message: "Spot couldn't be found"});
+    if(!(spot.ownerId === userId)) return res.status(403).json({message: "forbidden"});
 
     try{
         await spot.update(req.body)
