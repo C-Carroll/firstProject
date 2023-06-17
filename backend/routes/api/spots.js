@@ -226,7 +226,7 @@ router.post("/:spotId/bookings", requireAuth, async(req, res) => {
             ownerId: userId
     }})
 
-    if(isOwner) return res.status(404).json({message: "Forbiden"})
+    if(isOwner) return res.status(403).json({message: "Forbiden"})
 
     const spot = await Spot.findOne({
         where: {id: spotId}
@@ -325,6 +325,7 @@ router.get("/:spotId/reviews", async(req, res) => {
 
     const reviews = await Review.findAll({
         where: {spotId: spotId},
+        attributes: { exclude: ['reviewImage'] },
         include: [
             {
             model: User,
@@ -444,6 +445,23 @@ router.put('/:spotId', requireAuth, async(req, res) => {
                 ownerId: userId
             }
         })
+
+        const info = {
+            id: updated.id,
+            ownerId: updated.ownerId,
+            address: updated.address,
+            city: updated.city,
+            state: updated.state,
+            country: updated.country,
+            lat: updated.lat,
+            lng: updated.lng,
+            name: updated.name,
+            description: updated.description,
+            price: updated.price,
+            createdAt: updated.createdAt,
+            updatedAt: updated.updatedAt
+        }
+
         res.status(200).json(updated)
     }
     catch(error){
@@ -564,6 +582,8 @@ router.post('/', validSpot, requireAuth, async(req, res) => {
             name: newSpot.name,
             description: newSpot.description,
             price: newSpot.price,
+            createdAt: newSpot.createdAt,
+            updatedAt: newSpot.updatedAt,
         }
     res.status(201).json(addedSpot)
     }
