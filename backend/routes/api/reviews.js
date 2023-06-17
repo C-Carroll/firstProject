@@ -151,7 +151,7 @@ router.get('/current', requireAuth, async(req, res)=> {
             }
         ]
     })
-   res.json(findAllUserReviews)
+   res.json({Reviews: findAllUserReviews})
 })
 
 module.exports = router;
