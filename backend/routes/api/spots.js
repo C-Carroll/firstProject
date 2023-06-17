@@ -123,6 +123,9 @@ router.get(
               filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
             }
 
+
+
+
             const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
 
 

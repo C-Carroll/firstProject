@@ -21,7 +21,9 @@ module.exports = {
         lng: -122.4730327,
         name: 'house',
         description: 'its a brick house',
-        price: 123
+        price: 123,
+        avgRating: 5,
+        previewImage: "https://preview.redd.it/snorp-snoop-v0-bb63qu22ah3b1.jpg?width=1080&crop=smart&auto=webp&v=enabled&s=c870984632eb29b58960f4ac9b51af718d342f80",
       },
       {
         ownerId: 1,
@@ -33,7 +35,9 @@ module.exports = {
         lng: -122.4730327,
         name: 'building',
         description: 'its a building',
-        price: 456
+        price: 456,
+        avgRating: 1,
+        previewImage: "https://preview.redd.it/just-a-cat-nothing-else-v0-uokilwd6k83b1.jpg?width=1080&crop=smart&auto=webp&v=enabled&s=ce9990f7a4add5f6daa21f97cc1fe1b54fb8fd27",
       },
       {
         ownerId: 1,
@@ -45,7 +49,9 @@ module.exports = {
         lng: -122.4730327,
         name: 'shell',
         description: 'its a turtle shell',
-        price: 999
+        price: 999,
+        avgRating: 3,
+        previewImage: "https://preview.redd.it/aohedni24t2b1.jpg?width=640&crop=smart&auto=webp&v=enabled&s=869408e399e0a1cb4c4e415fbf32892e5e5f3ddd",
       }
     ], {});
   },
