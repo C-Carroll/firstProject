@@ -111,8 +111,6 @@ router.get(
               include: [
                 {
                   model: Review,
-                  attributes: [],
-                  as: "SpotReviews",
                 },
                 {
                   model: SpotImage,
@@ -123,7 +121,7 @@ router.get(
                 },
               ],
               attributes: {
-                include: [[Sequelize.fn("AVG", Sequelize.col("SpotReviews.stars")), "avgRating"]],
+                include: [[Sequelize.fn("AVG", Sequelize.col("Review.stars")), "avgRating"]],
               },
               group: ["Spot.id"],
             });
