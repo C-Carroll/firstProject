@@ -92,6 +92,8 @@ router.get(
 
         if (arr.length >= 1) res.json({ spot: [...arr] });
         else return res.json({ spot: null });
+
+
 });
 
 /*------------------------------------------------------*/
@@ -217,6 +219,41 @@ router.post("/:spotId/bookings", requireAuth, async(req, res) => {
 
 /*------------------------------------------------------*/
 
+//GET BOOKINGS BY SPOT ID
+router.get('/:spotId/bookings' , requireAuth, async(req, res) => {
+    const spotId = req.params.spotId;
+    const userId = req.user.id;
+    const spot = await Spot.findOne({
+        where: {id: spotId}
+    })
+    if(!spot)return res.status(404).json("Spot not found");
+
+    const ownerSpot = await Spot.findOne({
+        where: {
+            id: spotId,
+            ownerId: userId
+        }
+    })
+    let bookings;
+    if(!ownerSpot){
+        bookings = await Booking.findAll({
+            where: {spotId: spotId},
+            attributes:['spotId', 'startDate', 'endDate']
+        })
+    } else if (ownerSpot){
+        bookings = await Booking.findAll({
+            where: {spotId: spotId},
+            include: {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+        })
+    }
+    res.status(200).json({Bookings: bookings})
+})
+
+/*------------------------------------------------------*/
+
 //GET REVIEWS FROM SPOT ID
 router.get("/:spotId/reviews", async(req, res) => {
     const spotId = Number(req.params.spotId)
@@ -307,6 +344,23 @@ catch(error){
 
 /*------------------------------------------------------*/
 
+//Delete spot by id
+router.delete('/:spotId', requireAuth, async(req, res) => {
+    const spotId = req.params.spotId;
+    const userId = req.user.id;
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId,
+            ownerId: userId
+        }
+    })
+    if(!spot) return res.status(404).json({message: "Spot not found"})
+    await spot.destroy()
+    res.status(200).json({"message": "Successfully deleted"})
+})
+
+/*------------------------------------------------------*/
+
 //EDIT A SPOT
 router.put('/:spotId', requireAuth, async(req, res) => {
     const spotId = Number(req.params.spotId);
@@ -369,8 +423,23 @@ router.get("/:spotId", async(req, res) => {
         "preview"
     ]
     })
-   // const imgArr
+  // const imgArr
    // console.log(images)
+    let reviewCount = await Review.count({
+        where: { stars: {
+            [Op.between]: [1, 5]
+            },
+            spotId: id
+        }
+    })
+    let reviewSum = await Review.sum('stars', {
+        where: { stars: {
+            [Op.between]: [1, 5]
+            }, spotId: id,
+        }
+    })
+
+    let average = (reviewSum / reviewCount)
 
    //format
    let spotInfo ={
@@ -387,13 +456,13 @@ router.get("/:spotId", async(req, res) => {
    price: spot.price,
    createdAt: spot.createdAt,
    updatedAt:  spot.updatedAt,
-   numReviews: 0, ///fix this when access
-   avgStarRating: spot.avgStarRating,
-   SpotImages: images,
+   numReviews: reviewCount, ///fix this when access -DONE
+   avgStarRating: average,
+  // SpotImages: images,
    Owner: ownerInfo
    }
 
-   console.log(owner)
+   //console.log(owner)
 
    //need to add spot images and owners - DONE
 
