@@ -25,7 +25,7 @@ module.exports = {
         price: 123
       },
       {
-        id: 1,
+        id: 2,
         ownerId: 1,
         address: '100 gov st',
         city: 'gov',
@@ -38,7 +38,7 @@ module.exports = {
         price: 456
       },
       {
-        id: 1,
+        id: 3,
         ownerId: 1,
         address: '100 turtle st',
         city: 'paris',
