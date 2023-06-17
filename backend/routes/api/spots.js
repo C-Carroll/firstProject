@@ -90,15 +90,9 @@ router.get(
 
         const { page=1, size=20, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
         let error = {}
-        if(page < 1 || page > 10 || isNaN(page)){
-            error.page = "Page must be greater than or equal to 1 or less than 10"
-        }
-        if(size < 1 || size > 20 || isNaN(size)){
-            error.size = "Size must be greater than or equal to 1 or less than 20"
-        }
-        if (maxLat &&  isNaN(maxLat)){
-            error.maxLat = "Maximum latitude is invalid"
-        }
+        if(page < 1 || page > 10 || isNaN(page)){ error.page = "Page must be greater than or equal to 1 or less than 10" }
+        if(size < 1 || size > 20 || isNaN(size)){ error.size = "Size must be greater than or equal to 1 or less than 20" }
+        if (maxLat &&  isNaN(maxLat)){ error.maxLat = "Maximum latitude is invalid" }
         if (minLat && isNaN(minLat)){ error.minLat = "Minimum latitude is invalid" }
         if (minLng && isNaN(minLng)){ error.minLng = "Minimum longitude is invalid" }
         if (maxLng && isNaN(maxLng)){ error.maxLng = "Maximum longitude is invalid" }
@@ -106,77 +100,77 @@ router.get(
         if (maxPrice && (maxPrice < 0 || isNaN(maxPrice))){ error.maxPrice = "Maximum price must be greater than or equal to 0" }
         if (Object.keys(error).length > 0) return res.status(400).json({message: "Bad Request", error})
 
-        try {
-            const spots = await Spot.findAll({
-              include: [
-                {
-                  model: Review,
-                },
-                {
-                  model: SpotImage,
-                  where: { preview: true },
-                  attributes: ["url"],
-                  order: [["createdAt", "DESC"]],
-                  limit: 1,
-                },
-              ],
-              attributes: {
-                include: [[Sequelize.fn("AVG", Sequelize.col("Review.stars")), "avgRating"]],
-              },
-              group: ["Spot.id"],
-            });
+        // try {
+        //     const spots = await Spot.findAll({
+        //       include: [
+        //         {
+        //           model: Review,
+        //         },
+        //         {
+        //           model: SpotImage,
+        //           where: { preview: true },
+        //           attributes: ["url"],
+        //           order: [["createdAt", "DESC"]],
+        //           limit: 1,
+        //         },
+        //       ],
+        //       attributes: {
+        //         include: [[Sequelize.fn("AVG", Sequelize.col("Review.stars")), "avgRating"]],
+        //       },
+        //       group: ["Spot.id"],
+        //     });
 
-            let filteredSpots = spots;
+        //     let filteredSpots = spots;
 
-            if (minLat && maxLat) {
-              filteredSpots = filteredSpots.filter((spot) => spot.lat >= minLat && spot.lat <= maxLat);
-            } else if (minLat) {
-              filteredSpots = filteredSpots.filter((spot) => spot.lat >= minLat);
-            } else if (maxLat) {
-              filteredSpots = filteredSpots.filter((spot) => spot.lat <= maxLat);
-            }
+        //     if (minLat && maxLat) {
+        //       filteredSpots = filteredSpots.filter((spot) => spot.lat >= minLat && spot.lat <= maxLat);
+        //     } else if (minLat) {
+        //       filteredSpots = filteredSpots.filter((spot) => spot.lat >= minLat);
+        //     } else if (maxLat) {
+        //       filteredSpots = filteredSpots.filter((spot) => spot.lat <= maxLat);
+        //     }
 
-            if (minPrice && maxPrice) {
-              filteredSpots = filteredSpots.filter(
-                (spot) => spot.price >= minPrice && spot.price <= maxPrice
-              );
-            } else if (minPrice) {
-              filteredSpots = filteredSpots.filter((spot) => spot.price >= minPrice);
-            } else if (maxPrice) {
-              filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
-            }
+        //     if (minPrice && maxPrice) {
+        //       filteredSpots = filteredSpots.filter(
+        //         (spot) => spot.price >= minPrice && spot.price <= maxPrice
+        //       );
+        //     } else if (minPrice) {
+        //       filteredSpots = filteredSpots.filter((spot) => spot.price >= minPrice);
+        //     } else if (maxPrice) {
+        //       filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
+        //     }
 
-            const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
-
-
-              return {
-                id: spot.id,
-                ownerId: spot.ownerId,
-                address: spot.address,
-                city: spot.city,
-                state: spot.state,
-                country: spot.country,
-                lat: spot.lat,
-                lng: spot.lng,
-                name: spot.name,
-                description: spot.description,
-                price: spot.price,
-                createdAt: spot.createdAt,
-                updatedAt: spot.updatedAt,
-                avgRating: parseFloat(spot.getDataValue("avgRating") || 0).toFixed(1),
-                previewImage,
-              };
-            });
-
-            return res.status(200).json({ Spots: formattedSpots, page, size });
-          } catch (error) {
-            console.error("Error fetching spots:", error);
-            return res.status(500).json({ message: "Error fetching spots" });
-          }
+        //     const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
 
 
+        //       return {
+        //         id: spot.id,
+        //         ownerId: spot.ownerId,
+        //         address: spot.address,
+        //         city: spot.city,
+        //         state: spot.state,
+        //         country: spot.country,
+        //         lat: spot.lat,
+        //         lng: spot.lng,
+        //         name: spot.name,
+        //         description: spot.description,
+        //         price: spot.price,
+        //         createdAt: spot.createdAt,
+        //         updatedAt: spot.updatedAt,
+        //         avgRating: parseFloat(spot.getDataValue("avgRating") || 0).toFixed(1),
+        //         previewImage,
+        //       };
+        //     });
 
-        // res.json(allSpots)
+        //     return res.status(200).json({ Spots: formattedSpots, page, size });
+        //   } catch (error) {
+        //     console.error("Error fetching spots:", error);
+        //     return res.status(500).json({ message: "Error fetching spots" });
+        //   }
+
+
+        const allSpots = await Spot.findAll()
+         res.json(allSpots)
 
 });
 
