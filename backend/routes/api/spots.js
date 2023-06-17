@@ -293,7 +293,7 @@ try{
         {avgRating: average},
         {where: {id: spotId}}
     )
-
+    console.log(newReview)
     res.status(201).json(safeReview)
 }
 catch(error){
