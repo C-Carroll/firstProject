@@ -102,8 +102,8 @@ router.get(
         if (minLat && isNaN(minLat)){ error.minLat = "Minimum latitude is invalid" }
         if (minLng && isNaN(minLng)){ error.minLng = "Minimum longitude is invalid" }
         if (maxLng && isNaN(maxLng)){ error.maxLng = "Maximum longitude is invalid" }
-        if (minPrice && minPrice < 0 || isNaN(minPrice)){ error.minPrice = "Minimum price must be greater than or equal to 0" }
-        if (maxPrice && maxPrice < 0 || isNaN(maxPrice)){ error.maxPrice = "Maximum price must be greater than or equal to 0" }
+        if (minPrice && (minPrice < 0 || isNaN(minPrice))){ error.minPrice = "Minimum price must be greater than or equal to 0" }
+        if (maxPrice && (maxPrice < 0 || isNaN(maxPrice))){ error.maxPrice = "Maximum price must be greater than or equal to 0" }
         if (Object.keys(error).length > 0) return res.status(400).json({message: "Bad Request", error})
 
         try {
