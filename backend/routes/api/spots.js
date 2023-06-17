@@ -149,8 +149,7 @@ router.get(
             }
 
             const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
-              const previewImage =
-                spot.SpotImages.length > 0 ? spot.SpotImages[0].url : "No Images uploaded.";
+
 
               return {
                 id: spot.id,
