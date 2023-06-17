@@ -172,6 +172,14 @@ router.get(
               };
             });
 
+            return res.status(200).json({ Spots: formattedSpots, page, size });
+          } catch (error) {
+            console.error("Error fetching spots:", error);
+            return res.status(500).json({ message: "Error fetching spots" });
+          }
+
+
+
         // res.json(allSpots)
 
 });
