@@ -86,13 +86,14 @@ router.get(
     '/',
     async (req, res) => {
         let arr = []
-        let allDataSpots = await Spot.findAll()
+        let allSpots = await Spot.findAll()
 
-        allDataSpots.forEach(spot => { arr.push(spot.dataValues) });
+        // allDataSpots.forEach(spot => { arr.push(spot.dataValues) });
 
-        if (arr.length >= 1) res.json({ spot: [...arr] });
-        else return res.json({ spot: null });
+        // if (arr.length >= 1) res.json({ spot: [...arr] });
+        // else return res.json({ spot: null });
 
+        res.json(allSpots)
 
 });
 
@@ -458,7 +459,7 @@ router.get("/:spotId", async(req, res) => {
    updatedAt:  spot.updatedAt,
    numReviews: reviewCount, ///fix this when access -DONE
    avgStarRating: average,
-  // SpotImages: images,
+   SpotImages: images, //if issues look here
    Owner: ownerInfo
    }
 
