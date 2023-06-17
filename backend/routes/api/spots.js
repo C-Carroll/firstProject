@@ -462,7 +462,7 @@ router.put('/:spotId', requireAuth, async(req, res) => {
             updatedAt: updated.updatedAt
         }
 
-        res.status(200).json(updated)
+        res.status(200).json(info)
     }
     catch(error){
         res.status(500).json({"message": "could not update"})
