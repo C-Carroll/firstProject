@@ -104,7 +104,7 @@ router.get(
         if (maxLng && isNaN(maxLng)){ error.maxLng = "Maximum longitude is invalid" }
         if (minPrice && minPrice < 0 || isNaN(minPrice)){ error.minPrice = "Minimum price must be greater than or equal to 0" }
         if (maxPrice && maxPrice < 0 || isNaN(maxPrice)){ error.maxPrice = "Maximum price must be greater than or equal to 0" }
-        if (Object.keys(error).length > 0) return res.status(400).json({message: "Bad Request"}, error)
+        if (Object.keys(error).length > 0) return res.status(400).json({message: "Bad Request", error})
 
         try {
             const spots = await Spot.findAll({
