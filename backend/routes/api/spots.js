@@ -140,8 +140,8 @@ router.get(
                 price: spot.price,
                 createdAt: spot.createdAt,
                 updatedAt: spot.updatedAt,
-                avgRating: parseFloat(spot.getDataValue("avgRating") || 0).toFixed(1),
-                previewImage,
+                avgRating: spot.avgRating, //parseFloat(spot.getDataValue("avgRating") || 0).toFixed(1),
+                previewImage: spot.previewImage
               };
             });
 
