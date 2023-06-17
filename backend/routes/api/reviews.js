@@ -36,9 +36,11 @@ router.post('/:reviewId/images', requireAuth, async(req, res) => {
     const review = await Review.findOne({
         where: {
             id: reviewId,
-            userId: userId
     }})
     if(!review) return res.status(404).json({message: "Review couldn't be found"})
+
+    if (!(review.userId === userId)) return res.status(403).json({message: "Forbidden"})
+
     const picCounter = await ReviewImage.count({
         where: {
             reviewId: reviewId,
@@ -75,13 +77,14 @@ router.post('/:reviewId/images', requireAuth, async(req, res) => {
 //DELETE REVIEW
 router.delete('/:reviewId', requireAuth, async(req, res) => {
     const reviewId = req.params.reviewId;
+    const userId = req.user.id
     const review = await Review.findOne({
         where: {
             id: reviewId,
-            userId: req.user.id
         }
     })
     if(!review)return res.status(404).json({message: "No Review Found"})
+    if(!(review.userId === userId)) return res.status(403).json({message: "Forbidden"})
     await review.destroy()
     res.status(200).json({"message": "Successfully deleted"})
 })

@@ -25,7 +25,7 @@ router.delete('/:reviewImageId', requireAuth, async(req, res) => {
             userId: userId
         }
     })
-    if(!reviewCheck)return res.status(404).json({"message": "Forbiden"})
+    if(!reviewCheck)return res.status(403).json({"message": "Forbiden"})
     await image.destroy()
     res.status(200).json({"message": "Successfully deleted"})
 })
