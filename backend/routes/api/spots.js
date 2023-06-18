@@ -123,24 +123,25 @@ router.get(
               filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
             }
 
-
-
-            const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map(async(spot) => {
+            let average =  async(id) => {
                 let reviewCount = await Review.count({
                     where: { stars: {
                         [Op.between]: [1, 5]
                         },
-                        spotId: spot.id
+                        spotId: id
                     }
                 })
-                let reviewSum = await Review.sum('stars', {
+                let reviewSum = Review.sum('stars', {
                     where: { stars: {
                         [Op.between]: [1, 5]
-                        }, spotId: spot.id,
+                        }, spotId: id,
                     }
                 })
 
-                let average = (reviewSum / reviewCount)
+                return (reviewSum / reviewCount)
+            }
+
+            const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map(async(spot) => {
 
               return {
                 id: spot.id,
@@ -156,7 +157,7 @@ router.get(
                 price: spot.price,
                 createdAt: spot.createdAt,
                 updatedAt: spot.updatedAt,
-                avgRating: average,
+                avgRating: average(spot.id),
                 previewImage: spot.previewImage
               };
             });
