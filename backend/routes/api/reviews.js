@@ -102,8 +102,32 @@ router.put('/:reviewId',validReview, requireAuth, async(req, res) => {
     })
     if(!review)return res.status(404).json({message: "Review couldn't be found"});
     if(!(review.userId === userId))return res.status(403).json({message: "Forbidden"})
+    let spotId = review.spotId
     try{
         await review.update(req.body)
+
+        let reviewCount = await Review.count({
+            where: {
+                spotId: spotId,
+                stars: {
+                [Op.between]: [1, 5]
+            }}
+        })
+        let reviewSum = await Review.sum('stars', {
+            where: {
+                spotId: spotId,
+                stars: {
+                [Op.between]: [1, 5]
+            }}
+        })
+
+        let average = reviewSum / reviewCount
+
+        const spotRatingUpdate = async() => { await Spot.update(
+            {avgRating: average},
+            {where: {id: spotId}}
+        )}
+        spotRatingUpdate()
 
         const updated = await Review.findOne({
             where: {
@@ -117,8 +141,7 @@ router.put('/:reviewId',validReview, requireAuth, async(req, res) => {
         res.status(500).json({"message": "could not update"})
     }
 
-    console.log('this works')
-})
+
 
 /*------------------------------------------------------*/
 
