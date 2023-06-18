@@ -85,9 +85,6 @@ router.get('/current',requireAuth, async(req, res) => {
 router.get(
     '/',
     async (req, res) => {
-        // let arr = []
-        // let allSpots = await Spot.findAll()
-
 
         const { page=1, size=20, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
         let error = {}
@@ -102,20 +99,7 @@ router.get(
         if (Object.keys(error).length > 0) return res.status(400).json({message: "Bad Request", error})
 
         try {
-
-            const allSpots = await Spot.findAll({
-                include: [
-                  {
-                    model: Review,
-                    attributes: [],
-                    as: "sRev",
-                  },
-                ],
-                attributes: {
-                  include: [[Sequelize.fn("AVG", Sequelize.col("sRev.stars")), "avgRating"]],
-                },
-                group: ["Spot.id"],
-              });
+            const allSpots = await Spot.findAll()
             let filteredSpots = allSpots;
 
             if (minLat && maxLat) {
@@ -152,21 +136,16 @@ router.get(
                 price: spot.price,
                 createdAt: spot.createdAt,
                 updatedAt: spot.updatedAt,
-                avgRating: parseFloat(spot.getDataValue("avgRating")),
+                avgRating: spot.avgRating,
                 previewImage: spot.previewImage
               };
             });
 
             return res.status(200).json({ Spots: formattedSpots, page, size });
-          } catch (error) {
+        } catch (error) {
             console.error("Error fetching spots:", error);
             return res.status(500).json({ message: "Error fetching spots" });
-          }
-
-
-
-         res.json(allSpots)
-
+        }
 });
 
 /*------------------------------------------------------*/
