@@ -368,12 +368,16 @@ try{
          updatedAt: newReview.updatedAt,
     }
     let reviewCount = await Review.count({
-        where: { stars: {
+        where: {
+            spotId: spotId,
+            stars: {
             [Op.between]: [1, 5]
         }}
     })
     let reviewSum = await Review.sum('stars', {
-        where: { stars: {
+        where: {
+            spotId: spotId,
+            stars: {
             [Op.between]: [1, 5]
         }}
     })
