@@ -141,7 +141,7 @@ router.get(
                 return (reviewSum / reviewCount)
             }
 
-            const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map(async(spot) => {
+            const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
 
               return {
                 id: spot.id,
