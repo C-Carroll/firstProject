@@ -123,11 +123,10 @@ router.put('/:reviewId',validReview, requireAuth, async(req, res) => {
 
         let average = reviewSum / reviewCount
 
-        const spotRatingUpdate = async() => {
-            await Spot.update(
+        const spotRatingUpdate = await Spot.update(
             {avgRating: average},
             {where: {id: spotId}}
-        )}
+        )
 
         const updated = await Review.findOne({
             where: {
