@@ -87,6 +87,22 @@ router.get(
     async (req, res) => {
         // let arr = []
         // let allSpots = await Spot.findAll()
+        try {
+            const spots = await Spot.findAll({
+              include: [
+                {
+                  model: Review,
+                //   attributes: [],
+                  as: "sRev",
+                },
+
+              ],
+              attributes: {
+                include: [[Sequelize.fn("AVG", Sequelize.col("sRev.stars")), "avgRating"]],
+              },
+              //group: ["Spot.id"],
+            });
+
 
         const { page=1, size=20, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
         let error = {}
@@ -123,23 +139,23 @@ router.get(
               filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
             }
 
-            let average =  async(id) => {
-                let reviewCount = await Review.count({
-                    where: { stars: {
-                        [Op.between]: [1, 5]
-                        },
-                        spotId: id
-                    }
-                })
-                let reviewSum = Review.sum('stars', {
-                    where: { stars: {
-                        [Op.between]: [1, 5]
-                        }, spotId: id,
-                    }
-                })
+            // let average =  async(id) => {
+            //     let reviewCount = await Review.count({
+            //         where: { stars: {
+            //             [Op.between]: [1, 5]
+            //             },
+            //             spotId: id
+            //         }
+            //     })
+            //     let reviewSum = Review.sum('stars', {
+            //         where: { stars: {
+            //             [Op.between]: [1, 5]
+            //             }, spotId: id,
+            //         }
+            //     })
 
-                return (reviewSum / reviewCount)
-            }
+            //     return (reviewSum / reviewCount)
+            // }
 
             const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
 
@@ -157,7 +173,7 @@ router.get(
                 price: spot.price,
                 createdAt: spot.createdAt,
                 updatedAt: spot.updatedAt,
-                avgRating: average(spot.id),
+                avgRating: parseFloat(spot.getDataValue("avgRating")),
                 previewImage: spot.previewImage
               };
             });

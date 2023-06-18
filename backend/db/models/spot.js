@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.hasMany(
         models.SpotImage,
-        { foreignKey: 'spotId' }
+        { foreignKey: 'spotId',
+          as:  "sRev",
+        }
       )
 
       Spot.hasMany(
