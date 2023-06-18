@@ -87,21 +87,6 @@ router.get(
     async (req, res) => {
         // let arr = []
         // let allSpots = await Spot.findAll()
-        try {
-            const spots = await Spot.findAll({
-              include: [
-                {
-                  model: Review,
-                //   attributes: [],
-                  as: "sRev",
-                },
-
-              ],
-              attributes: {
-                include: [[Sequelize.fn("AVG", Sequelize.col("sRev.stars")), "avgRating"]],
-              },
-              //group: ["Spot.id"],
-            });
 
 
         const { page=1, size=20, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
@@ -118,7 +103,19 @@ router.get(
 
         try {
 
-            const allSpots = await Spot.findAll()
+            const allSpots = await Spot.findAll({
+                include: [
+                  {
+                    model: Review,
+                    attributes: [],
+                    as: "sRev",
+                  },
+                ],
+                attributes: {
+                  include: [[Sequelize.fn("AVG", Sequelize.col("sRev.stars")), "avgRating"]],
+                },
+                group: ["Spot.id"],
+              });
             let filteredSpots = allSpots;
 
             if (minLat && maxLat) {
@@ -138,24 +135,6 @@ router.get(
             } else if (maxPrice) {
               filteredSpots = filteredSpots.filter((spot) => spot.price <= maxPrice);
             }
-
-            // let average =  async(id) => {
-            //     let reviewCount = await Review.count({
-            //         where: { stars: {
-            //             [Op.between]: [1, 5]
-            //             },
-            //             spotId: id
-            //         }
-            //     })
-            //     let reviewSum = Review.sum('stars', {
-            //         where: { stars: {
-            //             [Op.between]: [1, 5]
-            //             }, spotId: id,
-            //         }
-            //     })
-
-            //     return (reviewSum / reviewCount)
-            // }
 
             const formattedSpots = filteredSpots.slice((page - 1) * size, page * size).map((spot) => {
 
