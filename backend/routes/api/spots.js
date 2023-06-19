@@ -223,7 +223,7 @@ router.post("/:spotId/bookings", requireAuth, async(req, res) => {
     const spot = await Spot.findOne({
         where: {id: spotId}
     })
-    if(!spot)return res.status(404).json({message: "Forbiden"}) //maybe change message
+    if(!spot)return res.status(404).json({message: "Spot not found"}) //maybe change message
 
     const { startDate, endDate } = req.body
     let start = Date.parse(startDate)
