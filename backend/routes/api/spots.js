@@ -109,11 +109,17 @@ router.get(
             } else if (maxLat) {
               filteredSpots = filteredSpots.filter((spot) => spot.lat <= maxLat);
             }
-
+            if (minLng && maxLng) {
+                filteredSpots = filteredSpots.filter((spot) => spot.lng >= minLng && spot.lng <= maxLng);
+            } else if (minLng) {
+                filteredSpots = filteredSpots.filter((spot) => spot.lng >= minLng);
+            } else if (maxLng) {
+                filteredSpots = filteredSpots.filter((spot) => spot.lng <= maxLng);
+            }
             if (minPrice && maxPrice) {
               filteredSpots = filteredSpots.filter(
                 (spot) => spot.price >= minPrice && spot.price <= maxPrice
-              );
+            );
             } else if (minPrice) {
               filteredSpots = filteredSpots.filter((spot) => spot.price >= minPrice);
             } else if (maxPrice) {
