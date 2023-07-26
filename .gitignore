@@ -1,7 +1,7 @@
 node_modules
-# .env
-# build
-# .DB_Store
-# *.db
-# badddd
-# z
+.env
+build
+.DB_Store
+*.db
+badddd
+z
