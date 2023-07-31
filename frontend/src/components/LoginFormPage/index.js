@@ -26,8 +26,8 @@ function LoginFormPage() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Log In .....</h1>
+      <form onSubmit={handleSubmit} className="loginForm">
         <label>
           Username or Email
           <input

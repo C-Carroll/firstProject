@@ -1,12 +1,12 @@
 // frontend/src/components/Navigation/index.js
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProfileButton from "./ProfileButton";
+import "./Navigation.css";
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+  const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
@@ -18,16 +18,18 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <li>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/login" className='sesh'>Log In</NavLink>
+        <NavLink to="/signup" className='sesh'>Sign Up</NavLink>
       </li>
     );
   }
 
   return (
-    <ul>
+    <ul className="navBar">
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink className="home" exact to="/">
+          Home
+        </NavLink>
       </li>
       {isLoaded && sessionLinks}
     </ul>

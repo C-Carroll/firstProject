@@ -1,3 +1,46 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
+
 .hidden{
     display: none;
+}
+.navBar {
+    background-color: #943D2C;
+    color: #E5BD77;
+    position: fixed;
+    height: 70px;
+    top: 0;
+    left: 0;
+    right: 0;
+    list-style-type: none;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Bagel Fat One', cursive;
+
+
+
+}
+.home{
+    text-decoration: none;
+    color:#E5BD77;
+    font-size: x-large;
+
+
+}
+button {
+    background-color: transparent;
+    color: #E5BD77;
+    border: none;
+    cursor: pointer;
+    margin-right: 2rem;
+    padding: 1rem;
+
+}
+.sesh {
+    text-decoration: none;
+    color:#E5BD77;
+    font-size: x-large;
+    padding: 1rem;
+    margin-right: 1rem;
 }
