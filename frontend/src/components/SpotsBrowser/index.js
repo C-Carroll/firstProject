@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const SpotsBrowser = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.spots)
+  console.log(spots)
 
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const SpotsBrowser = () => {
       {spots ? (
         spots.map((spot) => (
           <div className="spot">
-            <Link key={spot.id} to={`/api/spots/${spot.id}`} className='spotsLink'>
+            <Link key={spot.id} to={`/spots/${spot.id}`} className='spotsLink'>
 
             <img className='spotImg' src={spot.previewImage} alt={`Preview of ${spot.name}`}/>
 
@@ -38,7 +39,7 @@ const SpotsBrowser = () => {
             </Link>
           </ div>
         ))
-      ): <h3> null </h3>}
+      ): <h3> Currently No Spots </h3>}
       </div>
 
     </div>

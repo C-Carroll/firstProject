@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300;400&display=swap');
+
+.spotPage {
+    /* background-color: #E5BD77; */
+    width:1000px;
+    margin-top: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: fit-content;
+    /* border: 2px solid #474344; */
+}
+.spotDetails {
+    /* background-color: violet; */
+    width: 1000px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 9fr 4fr;
+    gap: 10px;
+}
+.spotHeader {
+    /* background-color: white; */
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 5px;
+}
+#locationInfo {
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+
+}
+#spotName{
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+
+}
+.spotImages {
+    /* background-color: red; */
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr; */
+}
+.prevImg {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    /* grid-row-start: 1;
+    grid-row-end:3; */
+    height: 100px;
+    width: 100px;
+
+}
+.regImg {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    display:flex;
+    flex-direction: row;
+    overflow: auto;
+}
+#photos {
+    height: 200px;
+    width: 200px;
+}
+.spotInformation {
+    /* background-color: gray; */
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.spotText {
+    /* background-color: blue; */
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+}
+#host {
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+#descript {
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.spotReserve {
+    /* background-color: pink; */
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    border: solid #474344 2px;
+    border-radius: 10px;
+
+}
+
+#sPrice{
+    /* background-color: red; */
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: large;
+
+}
+#sRating{
+    /* background-color: yellow; */
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: large;
+}
+#sReserve {
+    border: 2px solid #474344;
+    height: 40px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 250px;
+    border-radius: 6px;
+    background-color: #943D2C;
+    color: #E5BD77;
+    font-family: 'Bagel Fat One', cursive;
+    font-size: x-large;
+}
+.reviewsForSpot {
+    background-color: pink;
+    height: 500px;
+    width: 1000px;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+.reviews {
+    background-color: orange;
+}
+.reviewHeader {
+    background-color: white;
+}

@@ -1,12 +1,18 @@
 const SPOTS = "spots/allSpots";
+const SPOT = "spot/singleSpot"
 
 const allSpots = (spots) => ({
   type: SPOTS,
   payload: spots,
 });
+const singleSpot = (spot) => ({
+    type: SPOT,
+    payload: spot,
+})
 
 export const getSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
+  console.log(response)
 
   if (response.ok) {
     const list = await response.json();
@@ -15,12 +21,22 @@ export const getSpots = () => async (dispatch) => {
   }
 };
 
-// export const getSpot = (spotId) = async(dispatch) => {
-//     const response = await fetch("/api/spots/:spotId")
-// }
+export const getSpot = (spotId) => async (dispatch) => {
+    const response = await fetch(`/api/spots/${spotId}`)
+    console.log(response)
+
+    if (response.ok){
+        console.log(response)
+        const spot = await response.json()
+        dispatch(singleSpot(spot))
+    }
+    else{console.log('no good')}
+}
+
 
 const initialState = {
   spots: [],
+  spot: null
 };
 
 const spotsReducer = (state = initialState, action) => {
@@ -29,8 +45,13 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...state,
         spots: action.payload,
-      };
-      default: return state
+    };
+    case SPOT:
+        return {
+          ...state,
+          spot: action.payload
+        }
+    default: return state
   }
 };
 

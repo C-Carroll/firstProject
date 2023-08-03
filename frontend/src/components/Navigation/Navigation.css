@@ -4,10 +4,19 @@
 .hidden{
     display: none;
 }
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.rando {
+    position: relative;
+    z-index: 2;
+}
 .navBar {
     background-color: #943D2C;
     color: #E5BD77;
     position: fixed;
+    float: none;
     height: 70px;
     top: 0;
     left: 0;
@@ -20,11 +29,13 @@
 
 
 
+
+
 }
 .home{
     text-decoration: none;
     color:#E5BD77;
-    font-size: x-large;
+    font-size: xx-large;
 
 
 }
