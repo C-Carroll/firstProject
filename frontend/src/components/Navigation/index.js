@@ -1,36 +1,52 @@
 // frontend/src/components/Navigation/index.js
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
+import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProfileButton from "./ProfileButton";
+import "./Navigation.css";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import CreateSpot from "../CreateSpot"
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded}) {
+  const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <li>
+      <li className='sessionLinks'>
+        <NavLink id='createSButt' to='/spot/new'>Rent your Home</NavLink>
         <ProfileButton user={sessionUser} />
       </li>
     );
   } else {
     sessionLinks = (
       <li>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+          <OpenModalButton
+          buttonText="Log In"
+          modalComponent={<LoginFormModal />}
+        />
+         <OpenModalButton
+          buttonText="Sign Up"
+          modalComponent={<SignupFormModal />}
+        />
       </li>
     );
   }
 
   return (
-    <ul>
+    <div className='rando'>
+    <ul className="navBar">
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink className="home" exact to="/">
+        <i class="fa-solid fa-spaghetti-monster-flying"></i>
+        </NavLink>
       </li>
       {isLoaded && sessionLinks}
     </ul>
+    {/* <div>{openModal && <LoginFormPage setModalOpen={setModalOpen}/>}</div> */}
+    </div>
   );
 }
 

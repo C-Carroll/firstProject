@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300;400&display=swap');
+
+.filled {
+    /* background-color: blueviolet; */
+    color: #CC7952;
+
+}
+.reviewContainer {
+    background-color:  #E5BD77;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+    width: 400px;
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+}
+
+.reviewContainer > h3 {
+    margin-top: 10px;
+    font-size: x-large;
+    font-family: 'Bagel Fat One', cursive;
+    color: #943D2C;
+}
+.reviewFormContainer {
+
+}
+#revTxtArea {
+    margin-top: 20px;
+}
+#reviewModalText {
+    height: 100px;
+    width: 300px;
+    resize: none;
+    background-color: #FFEED6;
+    border-radius: 5px;
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+}
+form {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0;
+}
+.stars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: larger;
+}
+#subButt {
+    margin: auto;
+    background-color: #943D2C;
+    color:#E5BD77;
+    font-family: 'Bagel Fat One', cursive;
+    border-radius: 5px;
+}

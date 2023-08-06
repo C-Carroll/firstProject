@@ -49,6 +49,19 @@ module.exports = {
         description: 'its a turtle shell',
         price: 999,
         previewImage: "https://preview.redd.it/aohedni24t2b1.jpg?width=640&crop=smart&auto=webp&v=enabled&s=869408e399e0a1cb4c4e415fbf32892e5e5f3ddd",
+      },
+      {
+        ownerId: 2,
+        address: '144 turtle st',
+        city: 'hhill county',
+        state: 'Texas',
+        country:'USA',
+        lat: 36.7645358,
+        lng: -121.4730327,
+        name: 'spot4',
+        description: 'its the 4th spot',
+        price: 999,
+        previewImage: "https://preview.redd.it/aohedni24t2b1.jpg?width=640&crop=smart&auto=webp&v=enabled&s=869408e399e0a1cb4c4e415fbf32892e5e5f3ddd",
       }
     ], {});
   },

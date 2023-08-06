@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300&display=swap');
+
+.login {
+    font-family: 'Bagel Fat One', cursive;
+    color:#E5BD77;
+    background-color: #CC7952;
+    margin-top: 120px;
+}
+#header {
+    margin-left: 25px;
+    margin-top: -15px;
+    font-size: 24px;
+}
+
+.loginForm{
+    padding-top: 50px;
+    height: 15em;
+    font-family: 'Fira Sans', sans-serif;
+    color:#DFD0BB;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1f 1fr 1fr ;
+
+}
+.usernametxt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    padding-bottom: 5px;
+    font-size: larger;
+}
+.usernameinput {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    text-align: center;
+    width: 60%;
+    padding: 3px;
+    border: 2px solid #474344;
+    border-radius: 5px;
+    background-color: #DFD0BB;
+    color: #474344;
+}
+.passwordtxt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    padding-bottom: 5px;
+    font-size: larger;
+}
+.passwordinput{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    text-align: center;
+    width: 60%;
+    padding: 3px;
+    border: 2px solid #474344;
+    border-radius: 5px;
+    background-color: #DFD0BB;
+    color: #474344;
+}
+.loginButton {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    border: 2px solid #474344 ;
+    border-radius: 10px;
+    margin: auto;
+    background-color: #E5BD77;
+    color:#474344;
+    font-family: 'Bagel Fat One', cursive;
+}
+.loginModalCon {
+    height: 450px;
+    width: 400px;
+    background-color: #CC7952;
+    margin: auto;
+    border-radius: 3%;
+    box-shadow: 10px 5px 5px #7A3325;
+    font-family: 'Bagel Fat One', cursive;
+    color:#E5BD77;
+}
+.loginModalCon > h1 {
+    margin-left: 1em;
+    padding-top: .5em;
+}

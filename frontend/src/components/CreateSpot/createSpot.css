@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300;400&display=swap');
+
+.createSpotPage {
+    margin-top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formContainer {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formContainer > form > h1{
+    font-family: 'Bagel Fat One', cursive;
+    color: #CC7952;
+}
+
+.locationDetails {
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    border-bottom: solid #474344 2px;
+}
+.locationGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr ;
+    margin-bottom: 20px;
+}
+
+#country {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+}
+#address {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#city {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#state {
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#lat {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+#lng {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.locationGrid > label {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+input {
+    border: solid #474344 1px;
+    border-radius: 4px;
+}
+
+
+
+.describeSpot {
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    border-bottom: solid #474344 2px;
+    padding-bottom: 20px;
+}
+#descriptionTextArea {
+    width: 600px;
+    height: 100px;
+    resize: none;
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    border: solid #474344 1px;
+    border-radius: 4px;
+    background-color: #FFEED6;
+}
+
+.nameInput {
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    border-bottom: solid #474344 2px;
+    padding-bottom: 20px;
+}
+
+.priceInput {
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    border-bottom: solid #474344 2px;
+    padding-bottom: 20px;
+}
+
+.imageDetails {
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    padding-bottom: 10px;
+}
+.linkInputs {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+.linkInputs > input {
+
+    margin: 5px;
+}
+input {
+    background-color: #FFEED6;
+
+}
+
+.butt {
+display: flex;
+justify-content: center;
+}
+.createButton {
+    margin-top: 10px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    background-color: #943D2C ;
+    font-family: 'Bagel Fat One', cursive;
+    border: solid transparent 1px;
+}
+.butt > button:hover {
+    color: #943D2C;
+    background-color: #E5BD77;
+    border: solid #474344 1px;
+    font-size: x-large;
+}
