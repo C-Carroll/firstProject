@@ -1,0 +1,24 @@
+                {starsArr.map((star, i) => {
+                    const rating = star
+                    return (
+                        <>
+                        <input
+                            type='radio'
+                            name='rate'
+                            value={rating}
+                            id='star'
+                            className={starClassName}
+                            onClick={((e) => setStars(e.target.value))}
+                        />
+                        <label for='star'>
+                        <i class="fa-regular fa-star"></i>
+                        </label>
+                        {/* <label for='star'>
+                        <i class="fa-regular fa-star"></i>
+                        <span>{rating}</span>
+                        </label> */}
+
+
+                        </>
+                    )
+                })}

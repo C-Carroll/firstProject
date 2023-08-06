@@ -3,17 +3,21 @@ import { useSelector } from "react-redux";
 import { NavLink, Route, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getSpot } from "../../store/spots";
-import { getReviews } from '../../store/reviews'
+
 import "./Spot.css";
 import Reviews from "../Reviews";
 import { Link } from "react-router-dom";
+
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots.spot);
+  // const owner = useSelector((state) => state.spots.spot.Owner);
+  // console.log(spot, owner)
+  const user = useSelector((state) => state.session.user )
+  if (user){ const userId = user.id}
 
-console.log(spotId)
   useEffect(() => {
     dispatch(getSpot(spotId))
   }, [dispatch, spotId]);
@@ -39,10 +43,16 @@ console.log(spotId)
 
   }
 
+  // const hostedBy = () => {
+  //   if(owner){
+  //     return (<p>Hosted by {owner.firstName}, {owner.lastName}</p>)
+  //   }
+  // }
 
+  console.log(spot)
   return (
   <div>
-    {spot ?
+    {spot && (
     <div className='spotPage'>
       <div className="spotDetails">
         <div className="spotHeader">
@@ -56,12 +66,16 @@ console.log(spotId)
       </div>
       <div className="spotInformation">
         <div className="spotText">
-          <span id='host'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</span>
+          <p id='host'>{`${spot.Owner.firstName}, ${spot.Owner.lastName}`}</p>
           <span id='descript'>{spot.description}</span>
         </div>
         <div className="spotReserve">
           <div id='sPrice'>${spot.price} night</div>
-          <div id='sRating'>{spot.avgRating ? spot.rating : 'New!'}</div>
+          <div className='resRevStats'>
+           <i id='resStar' class="fa-solid fa-star"></i>
+           {spot.avgStarRating ? <h3 className='resAvg'>{(Math.round((spot.avgStarRating) * 10) / 10)} • {spot.numReviews}{spot.numReviews === 1 ? ' Review' : ' Reviews'}</h3> : <h3>New!</h3>}
+          </div>
+          {/* <div id='sRating'>{spot.avgStarRating ? (Math.round((spot.avgStarRating) * 10) / 10) : 'New!'}</div> */}
           <button id='sReserve' onClick={() => {
             return(alert("Feature Coming Soon!"))
           }}>Reserve</button>
@@ -71,17 +85,17 @@ console.log(spotId)
       </div>
       <div className="reviewsForSpot">
         <div className="spotRevInfo">
-          <div id='star'>
-           <i class="fa-solid fa-star"></i>
-           {spot.avgStarRating ? <h3>{spot.avgStarRating} • {spot.numReviews} reviews</h3> : <h3>New!</h3>}
+          <div className='revStats'>
+           <i id='star' class="fa-solid fa-star"></i>
+           {spot.avgStarRating ? <h3>{(Math.round((spot.avgStarRating) * 10) / 10)} • {spot.numReviews}{spot.numReviews === 1 ? ' Review' : ' Reviews'}</h3> : <h3>New!</h3>}
           </div>
 
         </div>
-          <Reviews spotId={spotId} />
+          <Reviews spotId={spotId} user={user} spotOwnerId={spot.ownerId}/>
       </div>
 
-    </div>
-    : <h3>No Spot Found</h3>}
+    </div>)}
+
     </div>);
 };
 

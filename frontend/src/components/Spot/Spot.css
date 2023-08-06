@@ -66,20 +66,23 @@
     grid-column-end: 2;
     /* grid-row-start: 1;
     grid-row-end:3; */
-    height: 100px;
-    width: 100px;
+    height: 450px;
+    width: 450px;
+    margin: auto;
 
 }
 .regImg {
     grid-column-start: 2;
     grid-column-end: 4;
-    display:flex;
-    flex-direction: row;
-    overflow: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+
 }
 #photos {
     height: 200px;
     width: 200px;
+    margin: auto;
 }
 .spotInformation {
     /* background-color: gray; */
@@ -107,7 +110,7 @@
     grid-row-end: 3;
 }
 .spotReserve {
-    /* background-color: pink; */
+    background-color: #E5BD77;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -127,26 +130,13 @@
     justify-content: center;
     align-items: center;
     font-family: 'Fira Sans', sans-serif;
-    font-size: large;
+    font-size: 1.35em;
+    color: #474344;
 
-}
-#sRating{
-    /* background-color: yellow; */
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-right: 10px;
-    font-family: 'Fira Sans', sans-serif;
-    font-size: large;
 }
 #sReserve {
     border: 2px solid #474344;
-    height: 40px;
+    height: 50px;
     grid-column-start: 1;
     grid-column-end: 3;
     display: flex;
@@ -158,18 +148,47 @@
     background-color: #943D2C;
     color: #E5BD77;
     font-family: 'Bagel Fat One', cursive;
-    font-size: x-large;
+    font-size: xx-large;
 }
 .reviewsForSpot {
-    background-color: pink;
-    height: 500px;
+
+    height: auto;
     width: 1000px;
     justify-content: flex-end;
     align-items: baseline;
+    margin-bottom: 50px;
 }
 .reviews {
     background-color: orange;
 }
 .reviewHeader {
     background-color: white;
+}
+.revStats {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: larger;
+    color: #474344;
+    align-items: center;
+    border-bottom: #474344 solid 2px;
+}
+#star {
+    margin-top:auto;
+    margin-bottom: auto;
+    margin-left: 1vw;
+    margin-right: 5px;
+    padding: 5px;
+
+}
+.resRevStats {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: large;
+    color: #474344;
+    align-items: center;
+}
+#resStar {
+    margin-right: 5px;
 }

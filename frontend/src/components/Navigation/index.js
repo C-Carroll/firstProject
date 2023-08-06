@@ -4,44 +4,33 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import Modal from "../LoginFormPage/LoginModal";
-import { useState } from "react";
-import LoginFormPage from "../LoginFormPage";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import CreateSpot from "../CreateSpot"
 
 function Navigation({ isLoaded}) {
   const sessionUser = useSelector((state) => state.session.user);
 
-  const [openModal, setModalOpen] = useState(false)
-
-  function disableScroll (){
-    window.onscroll = function () { window.scrollTo(0, 0) };
-}
-  function allowScroll (){
-    window.onscroll = function (){}
-  }
-
-  useEffect(() => {
-    if(openModal){
-      disableScroll()
-    } else {
-      allowScroll()
-    }
-  })
-
-
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <li>
+      <li className='sessionLinks'>
+        <NavLink id='createSButt' to='/spot/new'>Rent your Home</NavLink>
         <ProfileButton user={sessionUser} />
-        <NavLink to='/spots/new'>Create a New Spot</NavLink>
       </li>
     );
   } else {
     sessionLinks = (
       <li>
-        <NavLink to="/login" className='sesh'>Log In</NavLink>
-        <NavLink to="/signup" className='sesh'>Sign Up</NavLink>
+          <OpenModalButton
+          buttonText="Log In"
+          modalComponent={<LoginFormModal />}
+        />
+         <OpenModalButton
+          buttonText="Sign Up"
+          modalComponent={<SignupFormModal />}
+        />
       </li>
     );
   }
@@ -51,7 +40,7 @@ function Navigation({ isLoaded}) {
     <ul className="navBar">
       <li>
         <NavLink className="home" exact to="/">
-          Home
+        <i class="fa-solid fa-spaghetti-monster-flying"></i>
         </NavLink>
       </li>
       {isLoaded && sessionLinks}

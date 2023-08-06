@@ -23,7 +23,7 @@ const SpotsBrowser = () => {
       <div className="spotsContainer">
       {spots ? (
         spots.map((spot) => (
-          <div className="spot">
+          <div className="spot" title={spot.name}>
             <Link key={spot.id} to={`/spots/${spot.id}`} className='spotsLink'>
 
             <img className='spotImg' src={spot.previewImage} alt={`Preview of ${spot.name}`}/>

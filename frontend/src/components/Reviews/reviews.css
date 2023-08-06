@@ -1,3 +1,35 @@
-.reviewInfo {
-    margin-left: 200px;
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300;400&display=swap');
+
+.singleRev{
+    display: grid;
+    grid-template-columns: 1fr;
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+}
+.reviewInfo > h4 {
+    font-size: x-large;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.reviewInfo > h5 {
+    font-size: large;
+    margin-top:5px;
+    margin-bottom: 15px;
+}
+.review > p{
+    margin-top: 0px;
+}
+#noRev {
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+    font-size: larger;
+}
+.revButton {
+
+    width: 250px;
+    margin-top: 5px;
+
+}
+.realRevButt {
+
 }

@@ -5,15 +5,30 @@ import { useDispatch } from "react-redux";
 import { getReviews } from '../../store/reviews'
 import { Link } from "react-router-dom";
 import './reviews.css'
+import OpenModalButton from "../OpenModalButton";
+import CreateReviewModal from "../CreateReviewModal";
 
 
-function Reviews ({spotId}) {
+function Reviews ({spotId, user, spotOwnerId}) {
+    const sessionUser = useSelector((state) => state.session.user)
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [hasRev, setHasRev] = useState(false)
+    const [isOwner, setIsOwner] = useState(false)
     const dispatch = useDispatch()
     const reviews = useSelector((state) => state.reviews.reviews)
     console.log(reviews)
     useEffect(() => {
         dispatch(getReviews(spotId))
     }, [dispatch, spotId])
+    useEffect(() => {
+        if(sessionUser){
+            setLoggedIn(true)
+            if (spotOwnerId === sessionUser.id){
+                setIsOwner(true)
+            } else setIsOwner(false)
+            console.log(sessionUser, sessionUser.id, spotOwnerId, (spotOwnerId === sessionUser.id))
+        } else setLoggedIn(false)
+    },[spotOwnerId, sessionUser])
     // let review = (reviews) = async() => {
     //     let rev = await reviews().Reviews
     //     return rev
@@ -46,12 +61,62 @@ function Reviews ({spotId}) {
         return year
     }
 
+    // const ReviewOwner = (reviewUserId) => {
+    //     if (Object.values(reviewUserId)[0] === userId) {
+    //         console.log("passIF")
+    //         setHasRev(true)
+    //         return true
+    //     }
+    //     else{
+    //         console.log("failed if", reviewUserId, userId, wow)
+    //         return false
+    //     }
+    // }
+
+    useEffect(() => {
+        if (user) {
+           reviews.map((rev) => {
+                console.log('useEff')
+                if(rev.userId === user.id) setHasRev(true)
+                else{
+                     console.log('not users')
+                     setHasRev(false)
+
+                }
+                return 'done'
+            })
+        }
+    }, [setHasRev, reviews, user])
+
+
+    const CreateRevButt = () => {
+        if(isOwner ^ hasRev) {
+        } else if (sessionUser){
+              console.log(hasRev)
+            return (
+                <div className="realRevButt">
+                    <OpenModalButton
+                        buttonText='Write Review'
+                        modalComponent={<CreateReviewModal spotId={spotId}/>}
+                        name='buttForRev'
+                    />
+
+                </div>
+            )
+        }
+    }
+
+
     return(
         <>
-        {reviews ?
+        <div className='revButton'>
+            <CreateRevButt />
+        </div>
+        {reviews.length > 0 ?
         (reviews.map((review) => (
-        <div>
+        <div className="singleRev">
             <div className="reviewInfo">
+                {/* <ReviewOwner reviewUserId={review.userId}/> */}
                 <h4>{review.User.firstName}</h4>
                 <h5>{monthFinder(review.createdAt)}, {yearFinder(review.createdAt)}</h5>
             </div>
@@ -61,7 +126,7 @@ function Reviews ({spotId}) {
                 </p>
             </div>
         </div>
-        ))) : <p>no reviews</p>
+        ))) : <p id='noRev'>Be the first to post a review!</p>
         // (reviews.map((rev) => (<p>{rev.id}</p>))) : <p>no reviews</p>
         }
         </>
