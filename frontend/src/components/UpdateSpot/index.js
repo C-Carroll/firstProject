@@ -28,14 +28,14 @@ const [price, setPrice]= useState('');
 const [isOwner, setIsOwner]= useState(false)
 const [errors, setErrors]= useState({})
 const { spotId } = useParams();
-console.log((spot ? spot : 'loading'))
+// console.log((spot ? spot : 'loading'))
 useEffect(() => {
     dispatch(spotActions.getSpot(spotId))
   }, [dispatch, spotId]);
 
 const handleSubmission = async(e) => {
    e.preventDefault()
-   console.log('hi')
+
    setErrors({})
    let err = {}
    if (!address){
@@ -80,10 +80,10 @@ const handleSubmission = async(e) => {
    if(Object.values(err).length > 0){
       setErrors(err)
    } else {
-    console.log('hit')
+   //  console.log('hit')
       try{
-        console.log('start')
-        console.log(address)
+      //   console.log('start')
+      //   console.log(address)
          const spotInfo = {
             address,
             city,
@@ -106,7 +106,7 @@ const handleSubmission = async(e) => {
       }
       catch (error) {
          console.log("errorss", error)
-         console.log('wot')
+         // console.log('wot')
       }
    }
 

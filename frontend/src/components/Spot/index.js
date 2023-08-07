@@ -58,7 +58,7 @@ const SpotDetails = () => {
     )
   }
 
-  console.log(spot)
+  // console.log(spot)
   return (
   <div>
     {spot && (

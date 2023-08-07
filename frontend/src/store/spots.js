@@ -38,20 +38,20 @@ export const removeSpot = (spotId) => async(dispatch) => {
   }
 }
 export const getUserSpots = () => async(dispatch) => {
-  console.log('is this working')
+  // console.log('is this working')
   const response = await csrfFetch('/api/spots/current')
-  console.log(response)
+  // console.log(response)
   if(response.ok){
-    console.log('resp ok')
+    // console.log('resp ok')
     const list = await response.json()
     dispatch(userSpots(list.Spots))
-    console.log(list.Spots)
+    // console.log(list.Spots)
     return list
   }
 }
 export const getSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
-  console.log(response)
+  // console.log(response)
 
   if (response.ok) {
     const list = await response.json();
@@ -63,10 +63,10 @@ export const getSpots = () => async (dispatch) => {
 
 export const getSpot = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
-    console.log(response)
+    // console.log(response)
 
     if (response.ok){
-        console.log(response)
+        // console.log(response)
         const spot = await response.json()
         dispatch(singleSpot(spot))
         return response;
@@ -102,8 +102,8 @@ export const makeNewSpot = (spot) => async(dispatch) => {
   if (response.ok) {
     const newSpot = await response.json()
     dispatch(singleSpot(newSpot))
-    console.log(singleSpot(newSpot))
-    console.log(response)
+    // console.log(singleSpot(newSpot))
+    // console.log(response)
     return newSpot;
   } else throw new Error ('action failed')
 }
@@ -122,7 +122,7 @@ export const makeSpotImages = (spotId, image) => async(dispatch) => {
   if (response.ok){
     const newImage = await response.json()
     dispatch(spotImages(newImage))
-    console.log(newImage)
+    // console.log(newImage)
     return newImage;
   }
 }
@@ -165,7 +165,7 @@ export const getReviews = (spotId) => async(dispatch) => {
   if(response.ok){
     const list = await response.json()
     dispatch(spotReviews(list.Reviews))
-    console.log(list.Reviews)
+    // console.log(list.Reviews)
     return response
   }
 }

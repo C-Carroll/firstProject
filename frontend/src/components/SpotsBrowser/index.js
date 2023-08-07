@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const SpotsBrowser = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.spots)
-  console.log(spots)
+  // console.log(spots)
 
 
   useEffect(() => {
