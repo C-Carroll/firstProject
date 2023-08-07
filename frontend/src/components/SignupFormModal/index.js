@@ -47,7 +47,7 @@ function SignupFormModal() {
     if(email && firstName && lastName && (username.length >= 4) && (password.length >= 6)){
         setButtonOff(false)
     }
-  })
+  },[email, username, firstName, lastName, password])
 
   return (
     <div className="signUpBack">

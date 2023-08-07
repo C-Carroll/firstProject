@@ -116,7 +116,9 @@ function Reviews ({spotId, user, spotOwnerId}) {
             <CreateRevButt />
         </div>
         {reviews.length > 0 ?
-        (reviews.map((review) => (
+        (reviews
+            .sort((a,b) => b.id - a.id)
+            .map((review) => (
         <div className="singleRev">
             <div className="reviewInfo">
                 {/* <ReviewOwner reviewUserId={review.userId}/> */}
@@ -129,8 +131,9 @@ function Reviews ({spotId, user, spotOwnerId}) {
                 </p>
             </div>
             <div className="delButt">
-                {DeleteButt(review.userId, review.id, review.spotId)}
+                {sessionUser && DeleteButt(review.userId, review.id, review.spotId)}
             </div>
+            <div className="line"></div>
         </div>
         ))) : (isOwner ? <div className="noRev">You Have No Reviews Yet</div> : <p className='noRev'>Be the first to post a review!</p>)
         // (reviews.map((rev) => (<p>{rev.id}</p>))) : <p>no reviews</p>
