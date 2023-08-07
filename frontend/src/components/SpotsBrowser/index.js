@@ -31,7 +31,8 @@ const SpotsBrowser = () => {
 
             <ul className='spotInfo'>
               <li id='spotLocation'>{spot.city}, {spot.state}</li>
-              {spot.avgRating ? <li id='spotRating'>{spot.avgRating}</li> : <li id='spotRating'>New! </li>}
+              {spot.avgRating ? <li id='spotRating'>★ {(Math.round((spot.avgRating) * 10) / 10)} </li> : <li id='spotRating'>New! </li>}
+
               <li id='spotPrice'>${spot.price}/night</li>
             </ul>
 

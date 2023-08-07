@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './Navigation.css';
+import { NavLink, Link, useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -30,6 +32,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -40,11 +43,18 @@ function ProfileButton({ user }) {
       <i className="fa-regular fa-user"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        <li>{user.username}</li>
-        <li>{user.firstName} {user.lastName}</li>
+        <div className='bottomLine'>
+        <li>Hello, {user.username}</li>
         <li>{user.email}</li>
+        </div>
         <li>
-          <button onClick={logout}>Log Out</button>
+          <NavLink id='manSpotLink' to='/spots/current'>Manage Spots</NavLink>
+        </li>
+
+        <li className="logoutCont">
+          <Link to='/'>
+          <button className="logoutButt" id='sixtwosix'onClick={logout}>Log Out</button>
+          </Link>
         </li>
       </ul>
     </div>

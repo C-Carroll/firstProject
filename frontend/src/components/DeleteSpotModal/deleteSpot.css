@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300;400&display=swap');
+
+.deleteBackground{
+    height: 200px;
+    width: 400px;
+    background-color: #CC7952;
+    margin: auto;
+    border-radius: 3%;
+    box-shadow: 10px 5px 5px #7A3325;
+    font-family: 'Bagel Fat One', cursive;
+    color:#E5BD77;
+}
+.deleteTxt {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.deleteTxt >h4 {
+    font-family: 'Fira Sans', sans-serif;
+    color:#DFD0BB;
+}
+/* .confirmDelSpotButts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+} */
+.buttsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.confirmYes {
+    height: 74;
+    width:168px;
+    padding: 5px;
+    margin: auto;
+    border: solid #474344 1px;
+    border-radius: 10px;
+    background-color: #E5BD77;
+    color: #474344 ;
+    transition: 0.1s;
+}
+.confirmNo {
+ padding: 5px;
+ border: solid #474344 1px;
+ border-radius: 10px;
+ background-color: #E5BD77;
+ color: #474344 ;
+ transition: 0.1s;
+}
+.confirmYes:hover {
+    background-color: #943D2C;
+    color:#E5BD77;
+    border-radius: 20px;
+}
+.confirmNo:hover {
+    background-color: #943D2C;
+    color:#E5BD77;
+    border-radius: 20px;
+}

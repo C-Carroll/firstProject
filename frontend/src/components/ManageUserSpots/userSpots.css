@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300&display=swap');
+
+.managePage {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Bagel Fat One', cursive;
+    color: #474344;
+}
+
+.manageSpotCreate {
+    background-color: #943D2C;
+    font-family: 'Bagel Fat One', cursive;
+    border-radius: 5px;
+    border: solid #474344 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 6vh;
+    transition: 0.3s;
+}
+.manageSpotCreate:hover {
+    background-color: #E5BD77;
+    color:#943D2C;
+    border-radius: 20px;
+}
+.manageSpotsContainer {
+    width: 1000px;
+    height: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: repeat(auto-fit, minmax(1fr, 350px));
+    gap: 10px;
+}
+.manageSpot {
+    height: auto;
+    width: 242.5px;
+    overflow: hidden;
+    margin-top: 10px;
+    border: solid transparent 1px;
+    border-radius: 5%;
+    padding: 5px;
+}
+.manageSpot:hover{
+    border: solid #474344 1px;
+    border-radius: 5%;
+}
+.manageSpotsLink {
+    text-decoration: none;
+}
+.manageSpotInfo {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+    row-gap: 5px;
+    /* background-color: yellow; */
+    font-family: 'Fira Sans', sans-serif;
+    color: #474344;
+}
+.manageSpotImg {
+    height: 200px;
+    width: 242.5px;
+    padding-bottom: 0;
+    border-radius: 5%;
+}
+#spotLocation {
+    /* background-color: black; */
+    padding-left: 5px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#spotRating {
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+#spotPrice {
+    /* background-color: brown; */
+    padding-left: 5px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.buttons {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px;
+
+
+}
+#update {
+    margin: auto;
+    margin-top: 5px;
+    height: 1vh;
+}
+#updateButt {
+    margin: auto;
+    background-color: #943D2C;
+    font-family: 'Bagel Fat One', cursive;
+    border-radius: 5px;
+    border: solid #474344 2px;
+    height: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.3s;
+}
+#updateButt:hover {
+    background-color: #E5BD77;
+    color:#943D2C;
+    border-radius: 20px;
+}
+#updateLink {
+    text-decoration: none;
+}
+#manCreate {
+    text-decoration: none;
+}
+
+#delete {
+    margin: auto;
+    margin-top: 5px;
+    color: #E5BD77;
+}
+.deleteButt {
+    margin:auto;
+    background-color: #943D2C;
+    font-family: 'Bagel Fat One', cursive;
+    border-radius: 5px;
+    border: solid #474344 2px;
+    height: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.3s;
+}
+.deleteButt:hover{
+    background-color: #E5BD77;
+    color:#943D2C;
+    border-radius: 20px;
+}
+.pleaseLogIn {
+    margin-top: 80px;
+}
+.noSpots {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.manageTitle > h2 {
+ font-size: xx-large;
+}
+.manageTitle {
+    padding-bottom: 5px;
+    border-bottom: solid #474344 2px;
+}
+@media (max-width: 1024px ) {
+    .manageSpotsContainer {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 5px;
+        width:auto;
+    }
+}
+@media (max-width: 745px) and (min-width: 350px){
+    .manageSpotsContainer {
+        grid-template-columns: 1fr 1fr ;
+        grid-gap: 5px;
+        width:auto;
+    }
+}
+@media (max-width: 349px){
+    .manageSpotsContainer {
+        grid-template-columns: 1fr ;
+        grid-gap: 5px;
+        width:auto;
+    }
+}

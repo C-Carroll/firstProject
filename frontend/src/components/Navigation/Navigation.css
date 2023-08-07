@@ -1,5 +1,5 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fira+Sans:wght@300;400&display=swap');
 
 .hidden{
     /* visibility: hidden; */
@@ -27,11 +27,8 @@ body{
     justify-content: space-between;
     align-items: center;
     font-family: 'Bagel Fat One', cursive;
-
-
-
-
-
+    margin-top: 0;
+    border-bottom: solid #474344 3px;
 }
 .home{
     text-decoration: none;
@@ -110,3 +107,83 @@ button {
 
 
   }
+
+  .profile-dropdown {
+    list-style: none;
+    font-family: 'Fira Sans', sans-serif;
+    margin: auto;
+    margin-left: 0;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: space-around; */
+  }
+  .profile-dropdown > li {
+    margin: 10px 0;
+  }
+
+  #manSpotLink {
+    text-decoration: none;
+    color:#E5BD77;
+  }
+  .logoutCont {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 4vh;
+    color: #943D2C
+  }
+  .logoutButt {
+    height: 4vh;
+    width: 12vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    background-color: #E5BD77;
+    color: #943D2C;
+    font-family: 'Bagel Fat One', cursive;
+    border: solid #474344 2px;
+    border-radius: 10px;
+    transition: 0.2s;
+
+  }
+  #sixtwosix:hover {
+    background-color: #474344;
+    color: #CC7952;
+  }
+
+
+  #manSpotLink:hover {
+    color: #DFD0BB;
+    font-size: large;
+  }
+  .logoutButt:hover {
+    color: #DFD0BB;
+    font-size: larger;
+  }
+#navHome {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+#navHome > p {
+  font-size: xx-large;
+}
+.home {
+  transition: all 0.1s ease-in-out;
+}
+.home:hover {
+  transform: scale(1.1)
+}
+.bottomLine {
+  border-bottom: solid #E5BD77 1px ;
+  padding-bottom: 5px;
+}

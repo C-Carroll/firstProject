@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import './reviews.css'
 import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from "../CreateReviewModal";
+import DeleteReviewModal from '../DeleteReviewModal'
 
 
 function Reviews ({spotId, user, spotOwnerId}) {
@@ -106,6 +107,20 @@ function Reviews ({spotId, user, spotOwnerId}) {
         }
     }
 
+    const DeleteButt = (id, reviewId, spotId) => {
+        if(id === sessionUser.id){
+            return(
+                <div className="deleteRevModalButt">
+                    <OpenModalButton
+                        buttonText='Delete'
+                        modalComponent={<DeleteReviewModal reviewId={reviewId} spotId={spotId}/>}
+                        name='deleteReview'
+                    />
+                </div>
+            )
+        }
+    }
+
 
     return(
         <>
@@ -125,8 +140,11 @@ function Reviews ({spotId, user, spotOwnerId}) {
                     {review.review}
                 </p>
             </div>
+            <div className="delButt">
+                {DeleteButt(review.userId, review.id, review.spotId)}
+            </div>
         </div>
-        ))) : <p id='noRev'>Be the first to post a review!</p>
+        ))) : (isOwner ? <div className="noRev">You Have No Reviews Yet</div> : <p className='noRev'>Be the first to post a review!</p>)
         // (reviews.map((rev) => (<p>{rev.id}</p>))) : <p>no reviews</p>
         }
         </>

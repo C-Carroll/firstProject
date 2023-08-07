@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
@@ -12,6 +12,7 @@ function SignupFormModal() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [buttonOff, setButtonOff] = useState(true)
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -33,6 +34,7 @@ function SignupFormModal() {
           const data = await res.json();
           if (data && data.errors) {
             setErrors(data.errors);
+            console.log(Object.values(errors).join())
           }
         });
     }
@@ -41,63 +43,75 @@ function SignupFormModal() {
     });
   };
 
+  useEffect(() => {
+    if(email && firstName && lastName && (username.length >= 4) && (password.length >= 6)){
+        setButtonOff(false)
+    }
+  })
+
   return (
-    <>
+    <div className="signUpBack">
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="signupForm" onSubmit={handleSubmit}>
+        <label className="emailTxt">
           Email
           <input
+          className="emailInput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+        {errors.email && <p className='errors'>{errors.email}</p>}
+        <label className='usernameTxt'>
           Username
           <input
+            className="usernameInput"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
+        {errors.username && <p className='errors'>{errors.username}</p>}
+        <label className='firstTxt'>
           First Name
           <input
+            className='firstInput'
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
+        {errors.firstName && <p className='errors'>{errors.firstName}</p>}
+        <label className='lastTxt'>
           Last Name
           <input
+            className='lastInput'
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
-        <label>
+        {errors.lastName && <p className='errors'>{errors.lastName}</p>}
+        <label className='pswrdTxt'>
           Password
           <input
+            className='pswrdInput'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
+        {errors.password && <p className='errors'>{errors.password}</p>}
+        <label className='conTxt'>
           Confirm Password
           <input
+            className='conInput'
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -105,11 +119,14 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && (
-          <p>{errors.confirmPassword}</p>
+          <p className='errors'>{errors.confirmPassword}</p>
         )}
-        <button type="submit">Sign Up</button>
+        {/* <div className="errors">
+        {(Object.values(errors).length > 0) && <p className="errors">{Object.values(errors).join()}</p> }
+        </div> */}
+        <button disabled={buttonOff} className='subSignUp' type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

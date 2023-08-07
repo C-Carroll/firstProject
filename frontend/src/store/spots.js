@@ -4,6 +4,8 @@ const SPOTS = "spots/allSpots";
 const SPOT = "spot/singleSpot"
 const SPOT_IMAGES = "spot/spotImages"
 const SPOT_REVS = "spot/spotReviews"
+const USER_SPOTS = "spots/userSpots"
+const DELETE_SPOT = 'spots/deleteSpot'
 
 const allSpots = (spots) => ({
   type: SPOTS,
@@ -21,7 +23,32 @@ const spotReviews = (reviews) => ({
   type: SPOT_REVS,
   payload: reviews
 })
-
+const userSpots = (userSpots) => ({
+  type: USER_SPOTS,
+  payload: userSpots
+})
+const deleteSpot = (spotId) => ({
+  type: DELETE_SPOT,
+  payload: spotId
+})
+export const removeSpot = (spotId) => async(dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {method: 'DELETE'})
+  if (response.ok){
+    dispatch(deleteSpot(spotId))
+  }
+}
+export const getUserSpots = () => async(dispatch) => {
+  console.log('is this working')
+  const response = await csrfFetch('/api/spots/current')
+  console.log(response)
+  if(response.ok){
+    console.log('resp ok')
+    const list = await response.json()
+    dispatch(userSpots(list.Spots))
+    console.log(list.Spots)
+    return list
+  }
+}
 export const getSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
   console.log(response)
@@ -85,7 +112,6 @@ export const makeSpotImages = (spotId, image) => async(dispatch) => {
   const { url, preview } = image
   const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: "POST",
-    headers:{"Content-Type": "application/json"},
     body: JSON.stringify({
       url,
       preview
@@ -99,6 +125,39 @@ export const makeSpotImages = (spotId, image) => async(dispatch) => {
     console.log(newImage)
     return newImage;
   }
+}
+
+export const updateSpot = (spotId, spot) => async(dispatch) => {
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price } = spot
+  const response = await csrfFetch(`/api/spots/${spotId}`,{
+    method: 'PUT',
+    body: JSON.stringify({
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price
+    })
+  })
+  if (response.ok) {
+    const updatedSpot = await response.json();
+    dispatch(singleSpot(updatedSpot))
+    return response;
+  } else throw new Error ('action failed')
+
 }
 
 export const getReviews = (spotId) => async(dispatch) => {
@@ -116,7 +175,8 @@ const initialState = {
   spots: [],
   spot: null,
   images: [],
-  reviews: []
+  reviews: [],
+  userSpots: []
 };
 
 const spotsReducer = (state = initialState, action) => {
@@ -140,7 +200,12 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: action.payload
-      }
+    }
+    case USER_SPOTS:
+    return {
+      ...state,
+      userSpots: action.payload
+    }
     default: return state
   }
 };

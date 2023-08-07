@@ -3,7 +3,8 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./reviewModal.css"
-import { postReview } from "../../store/reviews";
+import { postReview, getReviews } from "../../store/reviews";
+import { getSpot } from "../../store/spots";
 
 
 
@@ -39,8 +40,9 @@ function CreateReviewModal(spotId) {
                     stars,
                     review: revTxt
                 }
-                return dispatch(postReview(spotId.spotId, newReview))
-                .then(closeModal)
+                await dispatch(postReview(spotId.spotId, newReview))
+                await dispatch(getReviews(spotId.spotId))
+                await dispatch(getSpot(spotId.spotId))
                 .then(closeModal)
                 .catch(async (res) => {
                   const data = await res.json();

@@ -1,0 +1,63 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { NavLink, Route, useParams } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import { getUserSpots } from "../../store/spots";
+import './userSpots.css'
+import { Link } from "react-router-dom";
+
+
+const ManageUserSpots = () => {
+    const dispatch = useDispatch()
+    const userSpots = useSelector((state) => state.spots.userSpots)
+    const sessionUser = useSelector((state) => state.session.user);
+
+    useEffect(() => {
+        dispatch(getUserSpots())
+    },[dispatch])
+
+
+    return(
+
+        <div className="managePage">
+        {(userSpots.length  ?
+         <div>
+            <div className="manageTitle">
+                <h2>Manage Your Spots</h2>
+                <button className="manageSpotCreate">Create a New Spot</button>
+            </div>
+            <div className="manageSpotsContainer">
+                {userSpots.map((spot) => (
+                    <div className="manageSpot">
+                        <Link className='manageSpotsLink' key={spot.id} to={`/spots/${spot.id}`}>
+                            <img className='manageSpotImg' src={spot.previewImage} alt={`Preview of ${spot.name}`}/>
+
+                            <ul className="manageSpotInfo">
+                                <li id='spotLocation'>{spot.city}, {spot.state}</li>
+                                {spot.avgRating ? <li id='spotRating'>{spot.avgRating}</li> : <li id='spotRating'>New! </li>}
+                                <li id='spotPrice'>${spot.price}/night</li>
+                            </ul>
+                        </Link>
+                        <ul className="buttons">
+
+                            <li id='update'>
+                                <button id='updateButt'>Update</button>
+                            </li>
+                            <li id='delete'>
+                                <button id='deleteButt'>Delete</button>
+                            </li>
+
+                        </ul>
+                    </div>
+                ))}
+            </div>
+         </div>
+
+
+        : <h2>none</h2>)}
+        </div>
+    )
+
+}
+
+export default ManageUserSpots

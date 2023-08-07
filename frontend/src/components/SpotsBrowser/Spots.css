@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 130vh;
     font-family: 'Bagel Fat One', cursive;
     color: #474344;
 }
@@ -27,13 +27,19 @@
 
 .spot {
 
-    height: 250px;
+    height: 275px;
     width: 242.5px;
     /* border-style: solid; */
 
     overflow: hidden;
     margin-top: 10px;
-
+    border: solid transparent 1px;
+    border-radius: 5%;
+    transition: 0.2s;
+}
+.spot:hover {
+    border: solid #474344 1px;
+    border-radius: 5%;
 }
 .spotImg{
     height: 200px;
@@ -44,6 +50,7 @@
 .spotsLink {
     text-decoration: none;
 }
+
 .spotInfo{
     margin: 0;
     padding: 0;
@@ -79,4 +86,25 @@
     grid-row-start: 2;
     grid-row-end: 3;
 
+}
+@media (max-width: 1023px ) {
+    .spotsContainer {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 5px;
+        width:auto;
+    }
+}
+@media (max-width: 745px) and (min-width: 350px){
+    .spotsContainer {
+        grid-template-columns: 1fr 1fr ;
+        grid-gap: 5px;
+        width:auto;
+    }
+}
+@media (max-width: 349px){
+    .spotsContainer {
+        grid-template-columns: 1fr ;
+        grid-gap: 5px;
+        width:auto;
+    }
 }
