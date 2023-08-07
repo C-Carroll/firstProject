@@ -42,5 +42,24 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    transition: 0.3s;
+    transition: 0.2s;
+}
+.line {
+    margin-top: 3px;
+    border: rgba(71,67,68, 0.15) 1px solid;
+    width: 30vw;
+}
+.buttForRev{
+    border: #474344 solid 1px;
+    transition: 0.1s;
+}
+.buttForRev:hover {
+    background-color: #E5BD77;
+    color:#943D2C;
+    border-radius: 20px;
+}
+.deleteReview:hover {
+    background-color: #EB0701;
+    color:  #E5BD77 ;
+    border-radius: 20px;
 }

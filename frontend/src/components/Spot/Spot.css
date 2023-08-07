@@ -60,6 +60,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     /* grid-template-rows: 1fr 1fr; */
+    padding-bottom: 10px;
 }
 .prevImg {
     grid-column-start: 1;
@@ -81,8 +82,8 @@
     grid-template-rows: auto;
 }
 #photos {
-    height: 200px;
-    width: 200px;
+    height: 215px;
+    width: 215px;
     margin: auto;
     border-radius: 10px;
     border: #474344 solid 1px;

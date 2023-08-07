@@ -36,25 +36,25 @@
     margin: auto;
     border: solid #474344 1px;
     border-radius: 10px;
-    background-color: #E5BD77;
-    color: #474344 ;
+    background-color: #EB0701;
+    color:  #E5BD77 ;
     transition: 0.1s;
 }
 .confirmNo {
  padding: 5px;
  border: solid #474344 1px;
  border-radius: 10px;
- background-color: #E5BD77;
- color: #474344 ;
+ background-color: #474344;
+ color: #E5BD77 ;
  transition: 0.1s;
 }
 .confirmYes:hover {
-    background-color: #943D2C;
+    background-color: #000000;
     color:#E5BD77;
     border-radius: 20px;
 }
 .confirmNo:hover {
-    background-color: #943D2C;
-    color:#E5BD77;
+    color: #943D2C;
+    background-color:#E5BD77;
     border-radius: 20px;
 }
