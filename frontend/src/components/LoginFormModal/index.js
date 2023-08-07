@@ -26,8 +26,8 @@ function LoginFormModal() {
 
   const demo = (e) => {
     // e.preventDefault();
-    setCredential('Demo-lition')
-    setPassword('password')
+    setCredential('DemoUser')
+    setPassword('demo1234')
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
