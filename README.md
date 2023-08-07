@@ -1,6 +1,6 @@
 ## AriBnb 
 
-## Link
+
 ### https://charles-aribnb.onrender.com/
 
 ## API Documentation
