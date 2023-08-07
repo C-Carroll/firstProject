@@ -40,9 +40,9 @@ function Navigation({ isLoaded}) {
     <ul className="navBar">
       <li id='navHome'>
         <NavLink className="home" exact to="/">
-        <i class="fa-solid fa-spaghetti-monster-flying"></i>
-        </NavLink>
         <p>AriBnb</p>
+        </NavLink>
+
       </li>
       {isLoaded && sessionLinks}
     </ul>
