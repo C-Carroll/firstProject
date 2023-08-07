@@ -17,7 +17,7 @@ function Reviews ({spotId, user, spotOwnerId}) {
     const [isOwner, setIsOwner] = useState(false)
     const dispatch = useDispatch()
     const reviews = useSelector((state) => state.reviews.reviews)
-    console.log(reviews)
+
     useEffect(() => {
         dispatch(getReviews(spotId))
     }, [dispatch, spotId])
@@ -27,7 +27,7 @@ function Reviews ({spotId, user, spotOwnerId}) {
             if (spotOwnerId === sessionUser.id){
                 setIsOwner(true)
             } else setIsOwner(false)
-            console.log(sessionUser, sessionUser.id, spotOwnerId, (spotOwnerId === sessionUser.id))
+
         } else setLoggedIn(false)
     },[spotOwnerId, sessionUser])
     // let review = (reviews) = async() => {
@@ -53,7 +53,7 @@ function Reviews ({spotId, user, spotOwnerId}) {
     const monthFinder = (date) => {
         let num = date.split('-')[1]
         let checker = num.split('')
-        console.log('month = ', checker[1], months[checker[1]])
+
         if(checker[0] === '0') return months[checker[1]]
         else return months[num]
     }
@@ -62,25 +62,13 @@ function Reviews ({spotId, user, spotOwnerId}) {
         return year
     }
 
-    // const ReviewOwner = (reviewUserId) => {
-    //     if (Object.values(reviewUserId)[0] === userId) {
-    //         console.log("passIF")
-    //         setHasRev(true)
-    //         return true
-    //     }
-    //     else{
-    //         console.log("failed if", reviewUserId, userId, wow)
-    //         return false
-    //     }
-    // }
-
     useEffect(() => {
         if (user) {
            reviews.map((rev) => {
-                console.log('useEff')
+
                 if(rev.userId === user.id) setHasRev(true)
                 else{
-                     console.log('not users')
+
                      setHasRev(false)
 
                 }
@@ -93,7 +81,7 @@ function Reviews ({spotId, user, spotOwnerId}) {
     const CreateRevButt = () => {
         if(isOwner ^ hasRev) {
         } else if (sessionUser){
-              console.log(hasRev)
+
             return (
                 <div className="realRevButt">
                     <OpenModalButton

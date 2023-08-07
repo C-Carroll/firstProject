@@ -33,8 +33,9 @@ function CreateReviewModal(spotId) {
 
         if(Object.values(err).length > 0){
             setErrors(err)
+
         } else {
-            console.log(spotId.spotId)
+
 
                 const newReview = {
                     stars,
@@ -54,7 +55,7 @@ function CreateReviewModal(spotId) {
 
 
         }
-        return (setErrors())
+        // return (setErrors())
     }
 
     const buttOn = () => {

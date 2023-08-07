@@ -27,7 +27,7 @@ export const getReviews = (spotId) => async (dispatch) => {
     if (response.ok) {
         const list = await response.json()
         dispatch(spotReviews(list.Reviews))
-        console.log(list.Reviews)
+        // console.log(list.Reviews)
         return response
     }
 }
@@ -57,7 +57,7 @@ const initialState = {
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_REVIEWS:
-            console.log(action.payload)
+            // console.log(action.payload)
             return {
                 ...state,
                 reviews: action.payload

@@ -20,7 +20,7 @@ const DeleteReviewModal = ({reviewId, spotId}) => {
         closeModal()
     }
 
-    console.log(reviewId)
+
 
     return (
         <div className="deleteBackground">

@@ -69,6 +69,8 @@
     height: 450px;
     width: 450px;
     margin: auto;
+    border-radius: 10px;
+    border: #474344 solid 1px;
 
 }
 .regImg {
@@ -77,12 +79,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-
 }
 #photos {
     height: 200px;
     width: 200px;
     margin: auto;
+    border-radius: 10px;
+    border: #474344 solid 1px;
 }
 .spotInformation {
     /* background-color: gray; */

@@ -78,23 +78,23 @@ const handleSubmission = async(e) => {
    }
    if(!prevImg) {
       err.prevImg = "Preview Image is required"
-   } else if (/\.(jpg|jpeg|png)$/.test(prevImg) === false){
+   } else if (/\.(jpg|jpeg|png|PNG)$/.test(prevImg) === false){
       err.prevImg = "Image URL needs to end in png or jpg (or jpeg)"
    }
    if(img2) {
-      if(/\.(jpg|jpeg|png)$/.test(img2) === false){
+      if(/\.(jpg|jpeg|png|PNG)$/.test(img2) === false){
       err.img2 = "Image URL needs to end in png or jpg (or jpeg)"
    }}
    if(img3) {
-      if(/\.(jpg|jpeg|png)$/.test(img3) === false){
+      if(/\.(jpg|jpeg|png|PNG)$/.test(img3) === false){
       err.img3 = "Image URL needs to end in png or jpg (or jpeg)"
    }}
    if(img4) {
-      if(/\.(jpg|jpeg|png)$/.test(img4) === false){
+      if(/\.(jpg|jpeg|png|PNG)$/.test(img4) === false){
       err.img4 = "Image URL needs to end in png or jpg (or jpeg)"
    }}
    if(img5) {
-      if(/\.(jpg|jpeg|png)$/.test(img5) === false){
+      if(/\.(jpg|jpeg|png|PNG)$/.test(img5) === false){
       err.img5 = "Image URL needs to end in png or jpg (or jpeg)"
    }}
 
@@ -116,7 +116,7 @@ const handleSubmission = async(e) => {
             price
          }
          const newSpot = await dispatch(spotActions.makeNewSpot(spotInfo))
-         console.log("created: ", newSpot, ' : ', newSpot.id)
+
          const spotId = newSpot.id
          if (spotId) {
             await dispatch(spotActions.makeSpotImages(spotId, {
