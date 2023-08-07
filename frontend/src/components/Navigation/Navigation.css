@@ -178,6 +178,7 @@ button {
   font-size: xx-large;
 }
 .home {
+
   transition: all 0.1s ease-in-out;
 }
 .home:hover {
