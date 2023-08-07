@@ -54,7 +54,7 @@ const SpotDetails = () => {
     return (
       spot?.Owner?.firstName?
      <p>{ `Hosted by ${spot.Owner.firstName}, ${spot.Owner.lastName}`}</p>
-     : <div>...loading</div>
+     : <div>....loading</div>
     )
   }
 
