@@ -1,0 +1,137 @@
+if (sessionUser ) {
+   return(
+    <div className="wowzers">
+    {(spot && (spot.Owner.id === sessionUser.id) )  ?
+    <div className="updateSpotPage">
+    <div className='formContainer'>
+    <form onSubmit={handleSubmission}>
+       <h1>Update Your Spot</h1>
+       <div className='locationDetails'>
+          <h3>Where's your place located?</h3>
+          <p>Guests will only get your exact address once they booked a reservation</p>
+          <div className='locationGrid'>
+             <label id='country'>
+                Country
+                <input
+                   required
+                   placeholder='Country'
+                   type='text'
+                   value={country}
+                   onChange={((e) => setCountry(e.target.value))}
+                />
+                {errors.country && <div className='createSpotErrors'>{errors.country}</div>}
+             </label>
+             <label id='address'>
+                Street Address
+                <input
+                   required
+                   placeholder='Street Address'
+                   type='text'
+                   value={address}
+                   onChange={((e) => setAddress(e.target.value))}
+                />
+                {errors.address && <div className='createSpotErrors'>{errors.address}</div>}
+             </label>
+             <label id='city'>
+                City
+                <input
+                   required
+                   placeholder='City'
+                   type='text'
+                   value={city}
+                   onChange={((e) => setCity(e.target.value))}
+                />
+                {errors.city && <div className='createSpotErrors'>{errors.city}</div>}
+             </label>
+             <label id='state'>
+                State
+                <input
+                   required
+                   placeholder='State'
+                   type='text'
+                   value={state}
+                   onChange={((e) => setState(e.target.value))}
+                />
+                {errors.state && <div className='createSpotErrors'>{errors.state}</div>}
+             </label>
+             <label id='lat'>
+                Latitide
+                <input
+                   placeholder='Latitude (optional)'
+                   type='number'
+                   value={lat}
+                   onChange={((e) => setLat(e.target.value))}
+                />
+                {errors.lat && <div className='createSpotErrors'>{errors.lat}</div>}
+             </label>
+             <label id='lng'>
+                Longitude
+                <input
+                   placeholder='Longitude (optional)'
+                   type='number'
+                   value={lng}
+                   onChange={((e) => setLng(e.target.value))}
+                />
+                {errors.lng && <div className='createSpotErrors'>{errors.lng}</div>}
+             </label>
+          </div>
+       </div>
+
+       <div className='describeSpot'>
+          <h3>Describe your place to guests</h3>
+          <p>
+             Mention the best features of your space, any special amentities like
+             fast wifi or parking, and what you love about the neighborhood.
+          </p>
+          <textarea
+             id='descriptionTextArea'
+             required
+             placeholder='Please write at least 30 characters'
+             value={description}
+             onChange={((e) => setDescription(e.target.value))}
+          >
+          </textarea>
+          {errors.description && <div className='createSpotErrors'>{errors.description}</div>}
+       </div>
+
+       <div className='nameInput'>
+          <h3>Create a title for your spot</h3>
+          <p>
+             Catch guests' attention with a spot title that highlights what makes
+             your place special
+          </p>
+
+          <input
+             required
+             placeholder='Name of your spot'
+             type='text'
+             value={name}
+             onChange={((e) => setName(e.target.value))}
+          />
+          {errors.name && <div className='createSpotErrors'>{errors.name}</div>}
+       </div>
+
+       <div className='priceInput'>
+          <h3>Set a base price for your spot</h3>
+          <p>
+             Competative pricing can help ypur listing stand out and rank higher
+             in search results
+          </p>
+
+          <input
+             required
+             placeholder='Price per night (USD)'
+             type='number'
+             value={price}
+             onChange={((e) => setPrice(e.target.value))}
+          />
+          {errors.price && <div className='createSpotErrors'>{errors.price}</div>}
+       </div>
+       <div className='butt'>
+       <button className="createButton" type='submit'>Update Spot</button>
+       </div>
+    </form>
+ </div>
+ </div>
+    : <h4>...loading</h4>}
+   </div>)

@@ -19,7 +19,7 @@
 .review > p{
     margin-top: 0px;
 }
-#noRev {
+.noRev {
     font-family: 'Fira Sans', sans-serif;
     color: #474344;
     font-size: larger;
@@ -29,7 +29,18 @@
     width: 250px;
     margin-top: 5px;
 
-}
-.realRevButt {
 
+}
+.deleteReview {
+    margin:auto;
+    background-color: #943D2C;
+    font-family: 'Bagel Fat One', cursive;
+    border-radius: 5px;
+    border: solid #474344 2px;
+    height: 1vh;
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: 0.3s;
 }

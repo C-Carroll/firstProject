@@ -66,9 +66,39 @@ const handleSubmission = async(e) => {
    } else if (parseInt(price) <= 0){
       err.price = "Price must be greater than 0"
    }
+   if(!lat){
+      setLat(5)
+     } else if (Math.abs(lat) > 180){
+      err.lat = "Lattitude must be between -90 and 90"
+     }
+     if(!lng){
+      setLng(5)
+     } else if (Math.abs(lng) > 180){
+      err.lng = "Longitude must be between -180 and 180"
+   }
    if(!prevImg) {
       err.prevImg = "Preview Image is required"
+   } else if (/\.(jpg|jpeg|png)$/.test(prevImg) === false){
+      err.prevImg = "Image URL needs to end in png or jpg (or jpeg)"
    }
+   if(img2) {
+      if(/\.(jpg|jpeg|png)$/.test(img2) === false){
+      err.img2 = "Image URL needs to end in png or jpg (or jpeg)"
+   }}
+   if(img3) {
+      if(/\.(jpg|jpeg|png)$/.test(img3) === false){
+      err.img3 = "Image URL needs to end in png or jpg (or jpeg)"
+   }}
+   if(img4) {
+      if(/\.(jpg|jpeg|png)$/.test(img4) === false){
+      err.img4 = "Image URL needs to end in png or jpg (or jpeg)"
+   }}
+   if(img5) {
+      if(/\.(jpg|jpeg|png)$/.test(img5) === false){
+      err.img5 = "Image URL needs to end in png or jpg (or jpeg)"
+   }}
+
+
 
    if(Object.values(err).length > 0){
       setErrors(err)
@@ -104,15 +134,15 @@ const handleSubmission = async(e) => {
             }
          }
 
-         function wait(time){
-            return new Promise(resolve => {
-               setTimeout(resolve, time)
-            })
-         }
-         async function go() {
-            await wait(5000);
-            history.push(`/spots/${spotId}`)
-         }
+         // function wait(time){
+         //    return new Promise(resolve => {
+         //       setTimeout(resolve, time)
+         //    })
+         // }
+         // async function go() {
+         //    await wait(5000);
+         //    history.push(`/spots/${spotId}`)
+         // }
 
       history.push(`/spots/${spotId}`)
 
@@ -186,22 +216,20 @@ if (sessionUser) {
                         <input
                            placeholder='Latitude (optional)'
                            type='number'
-                           max= '90'
-                           min= '-90'
                            value={lat}
                            onChange={((e) => setLat(e.target.value))}
                         />
+                        {errors.lat && <div className='createSpotErrors'>{errors.lat}</div>}
                      </label>
                      <label id='lng'>
                         Longitude
                         <input
                            placeholder='Longitude (optional)'
                            type='number'
-                           max='180'
-                           min='-180'
                            value={lng}
                            onChange={((e) => setLng(e.target.value))}
                         />
+                        {errors.lng && <div className='createSpotErrors'>{errors.lng}</div>}
                      </label>
                   </div>
                </div>
@@ -275,24 +303,28 @@ if (sessionUser) {
                      value={img2}
                      onChange={((e) => setImg2(e.target.value))}
                   />
+                  {errors.img2 && <div className='createSpotErrors'>{errors.img2}</div>}
                   <input
                      placeholder='Third Image URL (optional)'
                      type='text'
                      value={img3}
                      onChange={((e) => setImg3(e.target.value))}
                   />
+                  {errors.img3 && <div className='createSpotErrors'>{errors.img3}</div>}
                   <input
                      placeholder='Fourth Image URL (optional)'
                      type='text'
                      value={img4}
                      onChange={((e) => setImg4(e.target.value))}
                   />
+                  {errors.img4 && <div className='createSpotErrors'>{errors.img4}</div>}
                   <input
                      placeholder='Fifth Image URL (optional)'
                      type='text'
                      value={img5}
                      onChange={((e) => setImg5(e.target.value))}
                   />
+                  {errors.img5 && <div className='createSpotErrors'>{errors.img5}</div>}
                   </div>
                </div>
                <div className='butt'>

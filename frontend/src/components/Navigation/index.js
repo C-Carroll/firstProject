@@ -38,10 +38,11 @@ function Navigation({ isLoaded}) {
   return (
     <div className='rando'>
     <ul className="navBar">
-      <li>
+      <li id='navHome'>
         <NavLink className="home" exact to="/">
         <i class="fa-solid fa-spaghetti-monster-flying"></i>
         </NavLink>
+        <p>AriBnb</p>
       </li>
       {isLoaded && sessionLinks}
     </ul>

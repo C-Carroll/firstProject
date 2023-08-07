@@ -83,9 +83,33 @@ router.delete('/:reviewId', requireAuth, async(req, res) => {
             id: reviewId,
         }
     })
+
     if(!review)return res.status(404).json({message: "No Review Found"})
     if(!(review.userId === userId)) return res.status(403).json({message: "Forbidden"})
+    let spotId = review.spotId
     await review.destroy()
+
+    let reviewCount = await Review.count({
+        where: {
+            spotId: spotId,
+            stars: {
+            [Op.between]: [1, 5]
+        }}
+    })
+    let reviewSum = await Review.sum('stars', {
+        where: {
+            spotId: spotId,
+            stars: {
+            [Op.between]: [1, 5]
+        }}
+    })
+
+    let average = reviewSum / reviewCount
+
+    const spotRatingUpdate = await Spot.update(
+        {avgRating: average},
+        {where: {id: spotId}}
+    )
     res.status(200).json({"message": "Successfully deleted"})
 })
 

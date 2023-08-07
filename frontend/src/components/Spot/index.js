@@ -24,15 +24,16 @@ const SpotDetails = () => {
 
   const Photos = () => {
     let prev;
-    let reg = []
-    spot.SpotImages.forEach((photo) => {
+    let reg = [];
+    (spot.SpotImages || []).forEach((photo) => {
       if (photo.preview) prev = photo
       else reg.push(photo)
-    })
+    });
 
     return(
+
       <>
-      <img className='prevImg' src={prev.url} alt={`Preview of ${spot.name}`}/>
+      {prev && <img className='prevImg' src={prev.url} alt={`Preview of ${spot.name}`}/>}
       <div className="regImg" >
       {reg ? reg.map((photo) => (
         <img src={photo.url} id='photos' alt='Spot images'/>
@@ -48,6 +49,14 @@ const SpotDetails = () => {
   //     return (<p>Hosted by {owner.firstName}, {owner.lastName}</p>)
   //   }
   // }
+  const hostedBy = () => {
+
+    return (
+      spot?.Owner?.firstName?
+     <p>{ `Hosted by ${spot.Owner.firstName}, ${spot.Owner.lastName}`}</p>
+     : <div>...loading</div>
+    )
+  }
 
   console.log(spot)
   return (
@@ -66,7 +75,7 @@ const SpotDetails = () => {
       </div>
       <div className="spotInformation">
         <div className="spotText">
-          <p id='host'>{`${spot.Owner.firstName}, ${spot.Owner.lastName}`}</p>
+          <p id='host'>{hostedBy()}</p>
           <span id='descript'>{spot.description}</span>
         </div>
         <div className="spotReserve">
